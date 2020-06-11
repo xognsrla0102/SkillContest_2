@@ -9,17 +9,14 @@ private:
 	map<string, cScene*> m_scenes;
 	cScene* m_now = nullptr, *m_next = nullptr;
 
-	bool m_isFadeIn = false;
-	bool m_isFadeOut = false;
-
 	bool m_isFadeChange = false;
-
-	double m_changeSpeed = 20.0;
+	bool m_isFadeOut = false;
+	double m_changeSpeed;
 public:
-	string m_changeName;
+	string  m_changeName;
 	cImage* m_white = nullptr;
 	cImage* m_black = nullptr;
-	bool m_isSceneChange = false;
+	bool	m_isSceneChange = false;
 public:
 	cSceneManager();
 	virtual ~cSceneManager();
@@ -29,9 +26,6 @@ public:
 
 	void Update();
 	void Render();
-
-	bool FadeIn();
-	bool FadeOut();
 
 	void FadeSceneChange();
 

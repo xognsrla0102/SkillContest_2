@@ -22,8 +22,6 @@ public:
 	void Update();
 	void SetTransform();
 
-	void ResetSetting();
-
 	void SetShake(double time, int power, VEC2 initPos = VEC2(WINSIZEX / 2, WINSIZEY / 2));
 	void Shake();
 };

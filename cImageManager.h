@@ -23,14 +23,14 @@ public:
 	cMultiTexture* FindMultiTexture(string name);
 	cTexture* FindTexture(string name, int cnt = 0);
 
-	void Render(cTexture* text, VEC2 pos, VEC2 size = VEC2(1, 1), double rot = 0.0, bool isCenter = false, D3DXCOLOR color = D3DCOLOR_ARGB(255, 255, 255, 255));
+	void Render(cTexture* text, VEC2 pos, VEC2 size = VEC2(1, 1), double rot = 0.0, bool isCenter = false, D3DXCOLOR color = 0xffffffff);
 	void CropRender(cTexture* text, VEC2 pos, RECT rt, VEC2 size = VEC2(1, 1), bool isCenter = false);
 
 	void DrawNum(string text, VEC2 pos, int numD, VEC2 size = VEC2(1, 1));
 
 	//length '.' 포함 전체 숫자 갯수 dotD 점 텍스트 간격, numD 숫자 텍스트 간격
 	void DrawFloat(string text, VEC2 pos, int length, int dotD, int numD, VEC2 size = VEC2(1, 1));
-	void DrawFont(string text, VEC2 pos, string fontName = "Arial", int size = 20, D3DXCOLOR color = D3DCOLOR_ARGB(255, 255, 255, 255));
+	void DrawFont(string text, VEC2 pos, string fontName = "Arial", int size = 20, D3DXCOLOR color = 0xffffffff);
 };
 
 #define IMAGE cImageManager::GetInst()

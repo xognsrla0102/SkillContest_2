@@ -36,11 +36,6 @@ void cCameraManager::SetTransform()
 	DEVICE->SetTransform(D3DTS_VIEW, &m_view);
 }
 
-void cCameraManager::ResetSetting()
-{
-	m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
-}
-
 void cCameraManager::SetShake(double time, int power, VEC2 initPos)
 {
 	m_time = time;

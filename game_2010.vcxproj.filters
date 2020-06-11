@@ -87,6 +87,72 @@
     <Filter Include="0_core\object\_object">
       <UniqueIdentifier>{b4701711-3090-4dce-b06c-91f1ba443d19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\manager\effect">
+      <UniqueIdentifier>{99af7a2f-12ea-4b5e-9b74-f28e1695b371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\effect">
+      <UniqueIdentifier>{c174708e-1268-4357-b591-41be9779ef9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\timer">
+      <UniqueIdentifier>{360109b7-3129-46bb-a091-5329e963e4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\animation">
+      <UniqueIdentifier>{a57a2aa6-61e8-40c1-a5a2-3595c20d18cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\font">
+      <UniqueIdentifier>{ccfd66ab-726b-4747-885b-0d46b35ceb63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui">
+      <UniqueIdentifier>{a4f5b803-4dab-4d41-b2ab-b302d185a1b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui\ui">
+      <UniqueIdentifier>{4011d8ba-5ef6-4a03-b791-df8457981fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui\manager">
+      <UniqueIdentifier>{54020a9b-39c3-4306-aaff-6f90fc5e8776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\object">
+      <UniqueIdentifier>{121d23d7-8df7-487a-9c68-7ed90c509d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\item">
+      <UniqueIdentifier>{dd10f4ac-0560-43ab-a127-38d4f73cb2d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\item\item">
+      <UniqueIdentifier>{ecff2f61-75d4-4bb6-8279-826c671ebd28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\item\manager">
+      <UniqueIdentifier>{108d43fb-4041-4934-8358-0e23537a55f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\button">
+      <UniqueIdentifier>{9ea1875e-b858-4449-8e1c-9d8ee537c498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character">
+      <UniqueIdentifier>{6c7874f1-9cde-4380-9000-42c19f114705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\player">
+      <UniqueIdentifier>{a0b0748a-27bf-44ab-99ed-4f259d32368a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\motionBlur">
+      <UniqueIdentifier>{74888d7c-47ba-40ad-ab92-873462bceaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\motionBlur\info">
+      <UniqueIdentifier>{37217a2a-1be8-4194-a0b8-912520ea53f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\motionBlur\motion">
+      <UniqueIdentifier>{6683d394-1938-45d0-8f4e-d2a44cfbc026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\bullet">
+      <UniqueIdentifier>{2746d277-f83a-4ac2-a55b-3e2183ef28cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\title">
+      <UniqueIdentifier>{22a20c4c-f59b-4396-965e-81243b41b6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui\titleUI">
+      <UniqueIdentifier>{878cafc5-a3f7-4f34-9280-cc34c7b360cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\howto">
+      <UniqueIdentifier>{b9644dfe-f0c4-4988-b088-130bb04cb802}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -199,6 +265,60 @@
     <ClCompile Include="cScene.cpp">
       <Filter>0_core\scene\_scene</Filter>
     </ClCompile>
+    <ClCompile Include="cEffectManager.cpp">
+      <Filter>0_core\manager\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cEffect.cpp">
+      <Filter>0_core\object\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimer.cpp">
+      <Filter>0_core\object\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="cAnimation.cpp">
+      <Filter>0_core\object\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="cFontManager.cpp">
+      <Filter>0_core\manager\font</Filter>
+    </ClCompile>
+    <ClCompile Include="cUI.cpp">
+      <Filter>0_core\manager\ui\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIManager.cpp">
+      <Filter>0_core\manager\ui\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjectManager.cpp">
+      <Filter>0_core\manager\object</Filter>
+    </ClCompile>
+    <ClCompile Include="cObject.cpp">
+      <Filter>0_core\object\_object</Filter>
+    </ClCompile>
+    <ClCompile Include="cItemManager.cpp">
+      <Filter>0_core\object\item\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cItem.cpp">
+      <Filter>0_core\object\item\item</Filter>
+    </ClCompile>
+    <ClCompile Include="cButton.cpp">
+      <Filter>0_core\object\button</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>0_core\object\_character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="cMotionInfo.cpp">
+      <Filter>0_core\object\motionBlur\info</Filter>
+    </ClCompile>
+    <ClCompile Include="cMotionBlur.cpp">
+      <Filter>0_core\object\motionBlur\motion</Filter>
+    </ClCompile>
+    <ClCompile Include="cTitleScene.cpp">
+      <Filter>0_core\scene\title</Filter>
+    </ClCompile>
+    <ClCompile Include="cTitleUI.cpp">
+      <Filter>0_core\manager\ui\titleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="cHowtoScene.cpp">
+      <Filter>0_core\scene\howto</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -257,6 +377,60 @@
     </ClInclude>
     <ClInclude Include="cScene.h">
       <Filter>0_core\scene\_scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffectManager.h">
+      <Filter>0_core\manager\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffect.h">
+      <Filter>0_core\object\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimer.h">
+      <Filter>0_core\object\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="cAnimation.h">
+      <Filter>0_core\object\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="cFontManager.h">
+      <Filter>0_core\manager\font</Filter>
+    </ClInclude>
+    <ClInclude Include="cUI.h">
+      <Filter>0_core\manager\ui\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIManager.h">
+      <Filter>0_core\manager\ui\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectManager.h">
+      <Filter>0_core\manager\object</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
+      <Filter>0_core\object\_object</Filter>
+    </ClInclude>
+    <ClInclude Include="cItemManager.h">
+      <Filter>0_core\object\item\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cItem.h">
+      <Filter>0_core\object\item\item</Filter>
+    </ClInclude>
+    <ClInclude Include="cButton.h">
+      <Filter>0_core\object\button</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>0_core\object\_character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cMotionInfo.h">
+      <Filter>0_core\object\motionBlur\info</Filter>
+    </ClInclude>
+    <ClInclude Include="cMotionBlur.h">
+      <Filter>0_core\object\motionBlur\motion</Filter>
+    </ClInclude>
+    <ClInclude Include="cTitleScene.h">
+      <Filter>0_core\scene\title</Filter>
+    </ClInclude>
+    <ClInclude Include="cTitleUI.h">
+      <Filter>0_core\manager\ui\titleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="cHowtoScene.h">
+      <Filter>0_core\scene\howto</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
