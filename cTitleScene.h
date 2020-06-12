@@ -3,6 +3,7 @@ class cTitleScene : public cScene
 {
 private:
 	cTexture* m_bg = nullptr;
+	cImage* m_titleName = nullptr;
 	cImage* m_black = nullptr;
 	cTimer* m_cameraShakeTiming = nullptr;
 	double	m_lightDir;

@@ -7,7 +7,8 @@ void cInputManager::Update()
 
 	if (SCENE->m_isSceneChange) {
 		for (int i = 0; i < KEY_MAX; ++i)
-			m_nowKey[i] = false;
+			if(GetAsyncKeyState(i))
+				m_nowKey[i] = false;
 	}
 	else {
 		for (int i = 0; i < KEY_MAX; ++i)

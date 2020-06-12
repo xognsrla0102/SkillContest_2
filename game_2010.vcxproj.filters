@@ -153,6 +153,15 @@
     <Filter Include="0_core\scene\howto">
       <UniqueIdentifier>{b9644dfe-f0c4-4988-b088-130bb04cb802}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\scene\ingame">
+      <UniqueIdentifier>{af02fd93-590c-4f74-9822-502d752dc14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\scrool">
+      <UniqueIdentifier>{eebc4d82-2fbc-4b52-8a2a-02cc3d749bac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui\ingameUI">
+      <UniqueIdentifier>{ec509fee-ba19-486d-9164-645d8df9cca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -319,6 +328,18 @@
     <ClCompile Include="cHowtoScene.cpp">
       <Filter>0_core\scene\howto</Filter>
     </ClCompile>
+    <ClCompile Include="cIngameScene.cpp">
+      <Filter>0_core\scene\ingame</Filter>
+    </ClCompile>
+    <ClCompile Include="cScroolMap.cpp">
+      <Filter>0_core\object\scrool</Filter>
+    </ClCompile>
+    <ClCompile Include="cIngameUI.cpp">
+      <Filter>0_core\manager\ui\ingameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="cBullet.cpp">
+      <Filter>0_core\object\bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -431,6 +452,18 @@
     </ClInclude>
     <ClInclude Include="cHowtoScene.h">
       <Filter>0_core\scene\howto</Filter>
+    </ClInclude>
+    <ClInclude Include="cIngameScene.h">
+      <Filter>0_core\scene\ingame</Filter>
+    </ClInclude>
+    <ClInclude Include="cScroolMap.h">
+      <Filter>0_core\object\scrool</Filter>
+    </ClInclude>
+    <ClInclude Include="cIngameUI.h">
+      <Filter>0_core\manager\ui\ingameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="cBullet.h">
+      <Filter>0_core\object\bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

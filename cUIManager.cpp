@@ -5,7 +5,7 @@
 cUIManager::cUIManager()
 {
 	m_UIs["TitleSceneUI"] = new cTitleUI;
-	//m_UIs["IngameSceneUI"] = new cIngameUI;
+	m_UIs["IngameSceneUI"] = new cIngameUI;
 }
 
 cUIManager::~cUIManager()
@@ -33,8 +33,8 @@ void cUIManager::Update()
 		isChangeUI = true;
 	}
 	else if (sceneName == "IngameScene") {
-		//find = m_UIs.find("IngameSceneUI");
-		//isChangeUI = true;
+		find = m_UIs.find("IngameSceneUI");
+		isChangeUI = true;
 	}
 	else {
 		//특별한 일을 할 필요가 없는 씬이면

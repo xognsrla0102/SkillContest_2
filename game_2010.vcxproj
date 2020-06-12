@@ -385,6 +385,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAnimation.cpp" />
+    <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cButton.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cEffect.cpp" />
@@ -394,6 +395,8 @@
     <ClCompile Include="cHowtoScene.cpp" />
     <ClCompile Include="cImage.cpp" />
     <ClCompile Include="cImageManager.cpp" />
+    <ClCompile Include="cIngameScene.cpp" />
+    <ClCompile Include="cIngameUI.cpp" />
     <ClCompile Include="cInputManager.cpp" />
     <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cItemManager.cpp" />
@@ -407,6 +410,7 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
+    <ClCompile Include="cScroolMap.cpp" />
     <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="cTimer.cpp" />
@@ -417,6 +421,7 @@
     <ClCompile Include="math.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClInclude Include="cAnimation.h" />
+    <ClInclude Include="cBullet.h" />
     <ClInclude Include="cButton.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cEffect.h" />
@@ -426,6 +431,8 @@
     <ClInclude Include="cHowtoScene.h" />
     <ClInclude Include="cImage.h" />
     <ClInclude Include="cImageManager.h" />
+    <ClInclude Include="cIngameScene.h" />
+    <ClInclude Include="cIngameUI.h" />
     <ClInclude Include="cInputManager.h" />
     <ClInclude Include="cItem.h" />
     <ClInclude Include="cItemManager.h" />
@@ -439,6 +446,7 @@
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />
+    <ClInclude Include="cScroolMap.h" />
     <ClInclude Include="cSingleton.hpp" />
     <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="cTexture.h" />

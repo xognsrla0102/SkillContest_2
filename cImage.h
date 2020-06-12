@@ -5,6 +5,7 @@ public:
 	cTexture* m_text = nullptr;
 	D3DXCOLOR m_color = 0xffffffff;
 	VEC2 m_pos = VEC2(0, 0);
+	VEC2 m_size = VEC2(1, 1);
 
 	double a = 255.0;
 public:

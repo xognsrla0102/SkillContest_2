@@ -34,6 +34,8 @@ public:
 	cAnimation* GetAni() { return m_ani; }
 	string		GetName() { return m_objName; }
 
+	VEC2&		GetRefPos() { return m_pos; }
+
 	RECT		GetObjCollider();
 	RECT		GetCustomCollider(double n, VEC2 size = VEC2(1, 1));
 

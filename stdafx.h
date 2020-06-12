@@ -22,6 +22,10 @@ constexpr int WINSIZEY = 1080;
 //UI     크기 가로 : 세로 = 840 : 1080
 constexpr int GAMESIZE = 1080;
 
+#define GX(x) (420 + x)
+#define GY(y) (y)
+#define GXY(x, y) (VEC2(420 + x, y))
+
 enum TAGS {
 	ENEMY,
 	ITEM,
@@ -48,11 +52,13 @@ enum TAGS {
 #include "cAnimation.h"
 #include "cTitleScene.h"
 #include "cHowtoScene.h"
+#include "cIngameScene.h"
 #include "cSceneManager.h"
 #include "cFontManager.h"
 #include "cButton.h"
 #include "cUI.h"
 #include "cTitleUI.h"
+#include "cIngameUI.h"
 #include "cUIManager.h"
 #include "cObject.h"
 #include "cObjectManager.h"
@@ -61,6 +67,7 @@ enum TAGS {
 #include "cMotionInfo.h"
 #include "cMotionBlur.h"
 #include "cPlayer.h"
+#include "cScroolMap.h"
 
 void DEBUG_LOG(LPCSTR fmt, ...);
 

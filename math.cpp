@@ -9,5 +9,5 @@ double DistPoint(VEC2 a, VEC2 b)
 
 VEC2 RandomInsideSquare()
 {
-	return VEC2(rand() % 51 / 100.f * (rand() % 2 ? 1 : -1), rand() % 51 / 100.f * (rand() % 2 ? 1 : -1));
+	return VEC2(rand() % 6 / 10.f * (rand() % 2 ? 1 : -1), rand() % 6 / 10.f * (rand() % 2 ? 1 : -1));
 }

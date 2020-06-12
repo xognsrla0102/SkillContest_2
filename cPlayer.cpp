@@ -6,6 +6,7 @@ cPlayer::cPlayer()
 	Init();
 	m_fire = new cTimer(m_fireDelay[m_radialTan]);
 	m_img = new cImage;
+	m_img->m_text = IMAGE->FindTexture("IngamePlayerIMG");
 	m_objName = "Player";
 }
 
@@ -23,7 +24,8 @@ void cPlayer::Init()
 
 	m_damageTime = 0.f;
 
-	m_pos = VEC2(GAMESIZE / 2, 700);
+	m_pos = GXY(GAMESIZE / 2, GAMESIZE / 2);
+	m_size = VEC2(0.7, 0.7);
 
 	m_radialTan = true;
 
@@ -39,6 +41,8 @@ void cPlayer::Init()
 	m_isDamaged = false;
 	m_isLive = true;
 	m_waitFire = false;
+	m_canMove = true;
+	m_isNoOutMap = true;
 
 	m_hp = 20;
 	m_hpMax = 20;
@@ -101,6 +105,8 @@ void cPlayer::ChangeWeapon()
 
 void cPlayer::Move()
 {
+	if (!m_canMove) return;
+
 	if (KEYPRESS(VK_SHIFT)) m_moveSpd = m_originSpd * 0.5;
 	else m_moveSpd = m_originSpd;
 
@@ -120,7 +126,7 @@ void cPlayer::Move()
 
 void cPlayer::Fire()
 {
-	if (KEYPRESS(VK_SPACE)) {
+	if (KEYPRESS('Z')) {
 		char str[256] = "";
 		if (m_radialTan) sprintf(str, "Weapon0SND");
 		else  sprintf(str, "Weapon1SND");

@@ -15,24 +15,24 @@ cCameraManager::~cCameraManager()
 
 void cCameraManager::ResetCamera()
 {
-	D3DXMatrixOrthoLH(&m_proj, WINSIZEX, -WINSIZEY, 0.f, 1.f);
+	D3DXMatrixOrthoLH(&m_proj, WINSIZEX * m_size.x, -WINSIZEY * m_size.y, 0.f, 1.f);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &m_proj);
 	m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
 }
 
 void cCameraManager::Update()
 {
-	MATRIX s, t;
-	D3DXMatrixIdentity(&s);
+	MATRIX t;
 	D3DXMatrixIdentity(&t);
 	if (m_isShake) Shake();
-	D3DXMatrixScaling(&s, m_size.x, m_size.y, 1.f);
 	D3DXMatrixTranslation(&t, -m_pos.x, -m_pos.y, 0.f);
-	m_view = s * t;
+	m_view = t;
 }
 
 void cCameraManager::SetTransform()
 {
+	D3DXMatrixOrthoLH(&m_proj, WINSIZEX * m_size.x, -WINSIZEY * m_size.y, 0.f, 1.f);
+	DEVICE->SetTransform(D3DTS_PROJECTION, &m_proj);
 	DEVICE->SetTransform(D3DTS_VIEW, &m_view);
 }
 

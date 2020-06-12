@@ -20,8 +20,9 @@ public:
 	int m_hp;
 	int m_hpMax;
 
-
+	bool m_canMove;
 	bool m_waitFire;
+	bool m_isNoOutMap;
 public:
 	cPlayer();
 	virtual ~cPlayer();
@@ -37,5 +38,6 @@ public:
 	void ChangeWeapon();
 	void Move();
 	void Fire();
+	void NoOutMap();
 };
 

@@ -13,12 +13,12 @@ cButton::cButton(VEC2 pos, VEC2 deltaSize, VEC2 size)
 void cButton::Update()
 {
 	if (m_isOn == TRUE) {
-		Lerp(m_a, 255.0, 3);
-		Lerp(m_size, m_oldSize + m_deltaSize, 3);
+		Lerp(m_a, 255.0, 20);
+		Lerp(m_size, m_oldSize + m_deltaSize, 20);
 	}
 	else if (m_isOn == FALSE) {
-		Lerp(m_a, 150.0, 3);
-		Lerp(m_size, m_oldSize, 3);
+		Lerp(m_a, 150.0, 20);
+		Lerp(m_size, m_oldSize, 20);
 	}
 }
 
