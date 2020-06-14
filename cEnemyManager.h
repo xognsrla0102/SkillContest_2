@@ -8,7 +8,7 @@ private:
 	vector<cEnemy*> m_enemy;
 public:
 	cEnemyManager();
-	~cEnemyManager();
+	virtual ~cEnemyManager();
 
 	virtual void Update() override;
 	virtual void Render() override;

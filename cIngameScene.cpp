@@ -19,6 +19,7 @@ void cIngameScene::Init()
 
 	OBJFIND(PLAYER)->SetActive(true);
 	((cPlayer*)OBJFIND(PLAYER))->Init();
+	m_map->Init();
 	m_time = 0;
 }
 
@@ -42,19 +43,39 @@ void cIngameScene::Release()
 	SOUND->Stop("StageSND");
 	OBJFIND(PLAYER)->SetActive(false);
 	((cBulletManager*)OBJFIND(BULLET))->Reset();
+	((cEnemyManager*)OBJFIND(ENEMY))->Release();
 }
 
 void cIngameScene::DrawMap()
 {
-	switch (m_time) {
-	case 10:
-		//((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
-		//	new cMeteor("EnemyMeteorIMG", GXY(GAMESIZE / 2, GAMESIZE / 2), VEC2(1, 1), 0, 300)
-		//);
-		break;
-	case 20:
-		break;
-	case 30:
-		break;
+	if (m_time == 10 || m_time == 20 || m_time == 30) {
+		CreateMeteor(0, 4);
+		CreateTurret(0, 4);
+
+		CreateMeteor(6, 10);
+		CreateTurret(6, 10);
 	}
 }
+
+void cIngameScene::CreateMeteor(int startGrid, int endGrid)
+{
+	//startGrid 0 ~ 10번 그리드로 그리드 나뉨
+	VEC2 startPos = GXY(105 * startGrid, -100);
+	int num = endGrid - startGrid + 1;
+	//한줄에 운석이 최대 10개 들갈 수 있음
+	for (int i = 0; i < num; ++i)
+		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
+			new cMeteor("EnemyMeteorIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), rand() % 36 * 10, 300)
+		);
+}
+
+void cIngameScene::CreateTurret(int startGrid, int endGrid)
+{
+	VEC2 startPos = GXY(105 * startGrid, -100);
+	int num = endGrid - startGrid + 1;
+	for (int i = 0; i < num; ++i)
+		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
+			new cTurret("EnemyTurretIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), 0, 300)
+		);
+}
+

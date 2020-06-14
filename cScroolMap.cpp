@@ -24,14 +24,18 @@ cScroolMap::~cScroolMap()
 
 void cScroolMap::Init()
 {
+	char str[256];
+	sprintf(str, "Stage%dBG", GAME->m_nowStage);
+	m_img1->m_text = m_img2->m_text = IMAGE->FindTexture(str);
+
 	m_gas->m_text = IMAGE->FindTexture("IngameSmokeIMG", rand() % 4);
 	m_gas->m_pos = GXY(-500, -(double)m_gas->m_text->m_info.Height - 1000);
 
 	m_img1->m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2 - (double)m_img2->m_text->m_info.Height);
 	m_img2->m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
 
-	m_mapSpd = 500;
-	m_gasSpd = 5000;
+	m_mapSpd = 100;
+	m_gasSpd = 7000;
 }
 
 void cScroolMap::Update()

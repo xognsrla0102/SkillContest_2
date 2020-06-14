@@ -67,7 +67,7 @@ void cIntroScene::Intro()
 			Lerp(m_redCircle->m_size, VEC2(0, 0), 10);
 		}
 		else if (wait < 0.0) {
-			FONT->AddFont("STAGE 1 ÁøÀÔ", GXY(GAMESIZE / 2 - 270, 200), 100, 2, false, D3DCOLOR_XRGB(255, 255, 0));
+			FONT->AddFont("AVOID ENEMY BULLET!!", GXY(GAMESIZE / 2 - 500, 200), 100, 2, false, D3DCOLOR_XRGB(255, 0, 0));
 			SOUND->Copy("RedCircleSND");
 			SOUND->Copy("StageEnterSND");
 			SOUND->Copy("StageEnterSND");
@@ -78,8 +78,10 @@ void cIntroScene::Intro()
 		else {
 			if (isReady) {
 				Lerp(CAMERA->m_size, VEC2(1, 1), 3);
-				if (CAMERA->m_size.x < 1.01)
+				if (CAMERA->m_size.x < 1.01) {
+					GAME->Init();
 					SCENE->ChangeScene("IngameScene", "None", 0);
+				}
 			}
 			else {
 				Lerp(m_white->m_a, 0.0, 3);

@@ -39,6 +39,10 @@ void cGameManager::Init()
 
 void cGameManager::Update()
 {
+	if (KEYDOWN(VK_ESCAPE)) TIME_SCALE = 0.f;
+	if (KEYUP(VK_ESCAPE)) TIME_SCALE = 1.f;
+
+
 	if (KEYDOWN(VK_F1)) m_isNotDead = !m_isNotDead;
 	if (KEYDOWN(VK_F2)) if (m_level != 5) m_nowExp = m_expMax;
 

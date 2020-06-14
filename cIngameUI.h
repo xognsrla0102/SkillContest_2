@@ -4,8 +4,10 @@ class cIngameUI : public cUI
 {
 private:
 	cTexture* m_bg = nullptr;
+	cTexture* m_life = nullptr;
 	cTexture* m_exp = nullptr;
-	cImage* m_life[5] = { NULL };
+public:
+	cImage* m_damage = nullptr;
 public:
 	cIngameUI();
 	virtual ~cIngameUI();

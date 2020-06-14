@@ -192,6 +192,9 @@
     <Filter Include="0_core\object\_character\enemy\meteor">
       <UniqueIdentifier>{103dd926-0e2a-4be0-9f15-a012c794b018}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\object\_character\enemy\turret">
+      <UniqueIdentifier>{a582759f-9ee0-4e1a-b572-0da91a91f1b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -391,6 +394,12 @@
     <ClCompile Include="cMeteor.cpp">
       <Filter>0_core\object\_character\enemy\meteor</Filter>
     </ClCompile>
+    <ClCompile Include="cTurret.cpp">
+      <Filter>0_core\object\_character\enemy\turret</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyBullet.cpp">
+      <Filter>0_core\object\bullet\enemyBullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -536,6 +545,12 @@
     </ClInclude>
     <ClInclude Include="cMeteor.h">
       <Filter>0_core\object\_character\enemy\meteor</Filter>
+    </ClInclude>
+    <ClInclude Include="cTurret.h">
+      <Filter>0_core\object\_character\enemy\turret</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemyBullet.h">
+      <Filter>0_core\object\bullet\enemyBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

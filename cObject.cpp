@@ -26,10 +26,10 @@ RECT cObject::GetCustomCollider(double n, VEC2 size)
 bool cObject::OutMapChk(int offset)
 {
 	RECT world = {
-		0 - offset,
-		0 - offset,
-		GAMESIZE + offset,
-		GAMESIZE + offset,
+		GX(0 - offset),
+		GY(0 - offset),
+		GX(GAMESIZE + offset),
+		GY(GAMESIZE + offset),
 	};
 
 	//현재 객체가 맵과 충돌하지 않을 때 ( 맵밖일 때) true 반환

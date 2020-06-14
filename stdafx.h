@@ -71,9 +71,11 @@ enum TAGS {
 #include "cScroolMap.h"
 #include "cBullet.h"
 #include "cPlayerBullet.h"
+#include "cEnemyBullet.h"
 #include "cBulletManager.h"
 #include "cEnemy.h"
 #include "cMeteor.h"
+#include "cTurret.h"
 #include "cEnemyManager.h"
 
 void DEBUG_LOG(LPCSTR fmt, ...);

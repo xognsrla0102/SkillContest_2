@@ -1,6 +1,6 @@
 #pragma once
 #include "cObject.h"
-class cBullet : public cObject
+class cBullet abstract : public cObject
 {
 protected:
 	double m_bulletSpd;
@@ -9,10 +9,10 @@ protected:
 public:
 	//유도 전용
 	VEC2 m_target;
-	VEC2 m_dir;
+	VEC2 m_dir = VEC2(0, 0);
 	double m_atk;
-	bool m_isFaccel;
-	bool m_isSaccel;
+	bool m_isFaccel = false;
+	bool m_isSaccel = false;
 public:
 	cBullet(string imageName, VEC2 pos, VEC2 dir, double rot, VEC2 size = VEC2(1, 1));
 	virtual ~cBullet();

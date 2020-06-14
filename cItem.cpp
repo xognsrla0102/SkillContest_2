@@ -35,7 +35,7 @@ void cItem::Render()
 	IMAGE->Render(m_img, m_pos, VEC2(1, 1), 0.f, true);
 }
 
-void cItem::Collision()
+void cItem::OnCollision(cObject* other)
 {
 	if (m_isEndPos == FALSE) return;
 
@@ -46,7 +46,6 @@ void cItem::Collision()
 
 	if (AABB(itemRect, playerRect)) {
 		SOUND->Copy("GetItemSND");
-
 		if (m_key == "ItemHpIMG") {
 			player->m_hp += player->m_hpMax / 5.0;
 			if (player->m_hp > player->m_hpMax) {
@@ -59,7 +58,7 @@ void cItem::Collision()
 		else if (m_key == "ItemSkillTimeIMG") {
 			//모든 스킬 쿨타임 초기화
 		}
-		m_isLive = FALSE;
+		m_isLive = false;
 	}
 }
 

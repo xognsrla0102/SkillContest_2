@@ -393,6 +393,7 @@
     <ClCompile Include="cEffect.cpp" />
     <ClCompile Include="cEffectManager.cpp" />
     <ClCompile Include="cEnemy.cpp" />
+    <ClCompile Include="cEnemyBullet.cpp" />
     <ClCompile Include="cEnemyManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cGameManager.cpp" />
@@ -423,6 +424,7 @@
     <ClCompile Include="cTimer.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTitleUI.cpp" />
+    <ClCompile Include="cTurret.cpp" />
     <ClCompile Include="cUI.cpp" />
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="math.cpp" />
@@ -436,6 +438,7 @@
     <ClInclude Include="cEffect.h" />
     <ClInclude Include="cEffectManager.h" />
     <ClInclude Include="cEnemy.h" />
+    <ClInclude Include="cEnemyBullet.h" />
     <ClInclude Include="cEnemyManager.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cGameManager.h" />
@@ -467,6 +470,7 @@
     <ClInclude Include="cTimer.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTitleUI.h" />
+    <ClInclude Include="cTurret.h" />
     <ClInclude Include="cUI.h" />
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="math.h" />

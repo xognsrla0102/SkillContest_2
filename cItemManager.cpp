@@ -11,10 +11,8 @@ void cItemManager::Update()
 	size_t size = m_items.size();
 	for (size_t i = 0; i < size; ++i) {
 		m_items[i]->Update();
-		if(m_items[i]->OutMapChk(200))
-			m_items[i]->SetLive(false);
-		m_items[i]->Collision();
-
+		if(m_items[i]->OutMapChk(200)) m_items[i]->SetLive(false);
+		m_items[i]->OnCollision(OBJFIND(PLAYER));
 		if (m_items[i]->GetLive() == false) {
 			SAFE_DELETE(m_items[i]);
 			m_items.erase(m_items.begin() + i);

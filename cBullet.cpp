@@ -4,7 +4,6 @@
 cBullet::cBullet(string imageName, VEC2 pos, VEC2 dir, double rot, VEC2 size)
 {
 	m_img = IMAGE->FindTexture(imageName);
-
 	m_pos = pos;
 	m_dir = dir;
 	m_rot = rot;

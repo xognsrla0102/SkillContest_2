@@ -4,10 +4,9 @@
 class cPlayer : public cCharacter
 {
 private:
-	FLOAT m_originSpd;
-	FLOAT m_moveSpd;
-
-	FLOAT m_damageTime;
+	double m_originSpd;
+	double m_moveSpd;
+	double m_damageTime;
 public:
 	cTimer* m_fire = nullptr;
 
@@ -21,7 +20,7 @@ public:
 	bool m_waitFire;
 	bool m_isNoOutMap;
 public:
-	cPlayer(int hp);
+	cPlayer();
 	virtual ~cPlayer();
 
 	void Init();

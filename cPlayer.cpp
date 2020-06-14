@@ -1,8 +1,9 @@
 #include "DXUT.h"
 #include "cPlayer.h"
 
-cPlayer::cPlayer(int hp) : cCharacter(hp)
+cPlayer::cPlayer() : cCharacter(100)
 {
+	//얘는 init에서 어차피 체력 설정해주므로 hp가 의미없음
 	Init();
 	m_fire = new cTimer(m_fireDelay[m_radialTan]);
 	m_img = IMAGE->FindTexture("IngamePlayerIMG");
@@ -18,22 +19,24 @@ void cPlayer::Init()
 {
 	GAME->m_level = 1;
 
+	m_a = 255;
+
 	m_originSpd = m_moveSpd = 1000.f;
 
-	m_damageTime = 0.f;
+	m_damageTime = 2.f;
 
 	m_pos = GXY(GAMESIZE / 2, GAMESIZE / 2);
 
 	m_radialTan = true;
 
 	//초기 무기 딜레이
-	m_fireDelay[0] = 0.2;
+	m_fireDelay[0] = 0.15;
 	m_fireDelay[1] = 0.3;
 	if (m_fire) m_fire->m_delay = m_fireDelay[m_radialTan];
 
 	//초기 무기 공격력
-	m_atk[0] = 2;
-	m_atk[1] = 1;
+	m_atk[0] = 20;
+	m_atk[1] = 10;
 
 	m_isDamaged = false;
 	m_isLive = true;
@@ -41,8 +44,8 @@ void cPlayer::Init()
 	m_canMove = true;
 	m_isNoOutMap = true;
 
-	m_hp = 20;
-	m_hpMax = 20;
+	m_hp = 100;
+	m_hpMax = 100;
 }
 
 void cPlayer::Release()
@@ -58,16 +61,19 @@ void cPlayer::Update()
 	ChangeWeapon();
 
 	if (m_isDamaged) {
-		m_damageTime += D_TIME;
-		if (m_damageTime > 2.f) {
+		m_damageTime -= D_TIME;
+		if (m_damageTime < 0.f) {
 			m_a = 255.f;
-			m_damageTime = 0.f;
 			m_isDamaged = false;
 		}
 	}
 
 	if (m_waitFire) { if (m_fire->Update()) m_waitFire = false; }
 	else Fire();
+
+	for (auto iter : ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy())
+		if(iter->GetLive())
+			OnCollision(iter);
 }
 
 void cPlayer::Render()
@@ -80,6 +86,21 @@ void cPlayer::Render()
 void cPlayer::OnCollision(cObject* other)
 {
 	if (GAME->m_isNotDead || m_isDamaged) return;
+
+	if (AABB(GetCustomCollider(3), other->GetObjCollider())) {
+		CAMERA->SetShake(0.2, 30);
+		if (other->GetName() == "EnemyMeteor") {
+			m_hp -= ((cEnemy*)other)->m_atk;
+		}
+		SOUND->Copy("PlayerHitSND");
+		auto ingameUI = ((cIngameUI*)UI->FindUI("IngameSceneUI"));
+		ingameUI->m_damage->m_a = 255;
+
+		if (m_hp < 0) m_hp = 0;
+		m_isDamaged = true;
+		m_damageTime = 2;
+		m_a = 128;
+	}
 
 	if (m_isLive && m_hp <= 0) {
 		m_hp = 0;
@@ -154,42 +175,41 @@ void cPlayer::Fire()
 	if (KEYPRESS('Z')) {
 		m_waitFire = true;
 		SOUND->Play("PlayerBulletSND", false);
-
 		if (m_radialTan) {
 			switch (GAME->m_level) {
 			case 1:
-				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 2:
-				N_Way_Tan("PlayerBulletIMG", 5, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Way_Tan("PlayerBulletIMG", 5, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 3:
-				N_Way_Tan("PlayerBulletIMG", 8, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Way_Tan("PlayerBulletIMG", 8, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 4:
-				N_Way_Tan("PlayerBulletIMG", 8, 7, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Way_Tan("PlayerBulletIMG", 8, 7, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 5:
-				N_Way_Tan("PlayerBulletIMG", 8, 5, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Way_Tan("PlayerBulletIMG", 8, 5, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			}
 		}
 		else {
 			switch (GAME->m_level) {
 			case 1:
-				N_Straight_Tan("PlayerBulletIMG", 1, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Straight_Tan("PlayerBulletIMG", 1, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 2:
-				N_Straight_Tan("PlayerBulletIMG", 2, 20, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Straight_Tan("PlayerBulletIMG", 2, 20, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 3:
-				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 4:
-				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 5:
-				N_Straight_Tan("PlayerBulletIMG", 5, 35, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				N_Straight_Tan("PlayerBulletIMG", 5, 35, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			}
 		}

@@ -16,5 +16,7 @@ public:
 	virtual void Release() override;
 
 	void DrawMap();
+	void CreateMeteor(int startGrid, int endGrid);
+	void CreateTurret(int startGrid, int endGrid);
 };
 

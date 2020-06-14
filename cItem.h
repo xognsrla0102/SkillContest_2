@@ -13,7 +13,6 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
-
-	void Collision();
+	virtual void OnCollision(cObject* other) override;
 };
 

@@ -39,8 +39,15 @@ void cEffect::Update()
 	else if (m_size.x < 0.f) m_size = VEC2(0, 0);
 
 	m_a -= m_alphaSpeed * D_TIME;
-	if (m_ani->m_nowFrame == m_imgCnt - 1) {
-		m_a = 0.f;
+
+	if (m_alphaSpeed != 0) {
+		if (m_a < 0.f) {
+			m_a = 0;
+			m_isDone = TRUE;
+		}
+	}
+	else if (m_ani->m_nowFrame == m_imgCnt - 1) {
+		m_a = 0;
 		m_isDone = TRUE;
 	}
 	SetColor();

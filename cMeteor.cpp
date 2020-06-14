@@ -2,7 +2,7 @@
 #include "cMeteor.h"
 
 cMeteor::cMeteor(string name, VEC2 pos, VEC2 size, double rot, double downSpd)
-	: cEnemy(100, 5), m_downSpd(downSpd)
+	: cEnemy(0, 5), m_downSpd(downSpd)
 {
 	m_img = IMAGE->FindTexture(name);
 
@@ -20,15 +20,6 @@ void cMeteor::Update()
 {
 	Move();
 	if(OutMapChk(200)) m_isLive = false;
-}
-
-void cMeteor::Render()
-{
-	IMAGE->Render(m_img, m_pos, m_size, m_rot, true);
-}
-
-void cMeteor::OnCollision(cObject* other)
-{
 }
 
 void cMeteor::Dead()

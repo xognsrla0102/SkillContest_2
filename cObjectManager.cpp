@@ -34,6 +34,9 @@ void cObjectManager::AddOBJ(cObject* obj, int tagNum)
 cObject* cObjectManager::FindOBJ(int tagNum)
 {
 	if (m_objs[tagNum] != nullptr) return m_objs[tagNum];
-	else return nullptr;
+	else {
+		DEBUG_LOG("%d 태그를 찾을 수 없습니다.\n", tagNum);
+		return nullptr;
+	}
 }
 
