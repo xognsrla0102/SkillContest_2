@@ -4,15 +4,13 @@
 cItem::cItem(string key, VEC2 pos, VEC2 endPos)
 {
 	m_key = key;
-	m_img = new cImage;
-	m_img->m_text = IMAGE->FindTexture(key);
+	m_img = IMAGE->FindTexture(key);
 	m_pos = pos;
 	m_endPos = endPos;
 }
 
 cItem::~cItem()
 {
-	SAFE_DELETE(m_img);
 }
 
 void cItem::Update()
@@ -34,7 +32,7 @@ void cItem::Update()
 
 void cItem::Render()
 {
-	IMAGE->Render(m_img->m_text, m_pos, VEC2(1, 1), 0.f, true);
+	IMAGE->Render(m_img, m_pos, VEC2(1, 1), 0.f, true);
 }
 
 void cItem::Collision()

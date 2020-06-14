@@ -1,36 +1,33 @@
 #include "DXUT.h"
 #include "cPlayer.h"
 
-cPlayer::cPlayer()
+cPlayer::cPlayer(int hp) : cCharacter(hp)
 {
 	Init();
 	m_fire = new cTimer(m_fireDelay[m_radialTan]);
-	m_img = new cImage;
-	m_img->m_text = IMAGE->FindTexture("IngamePlayerIMG");
+	m_img = IMAGE->FindTexture("IngamePlayerIMG");
 	m_objName = "Player";
 }
 
 cPlayer::~cPlayer()
 {
 	SAFE_DELETE(m_fire);
-	SAFE_DELETE(m_img);
 }
 
 void cPlayer::Init()
 {
 	GAME->m_level = 1;
 
-	m_originSpd = m_moveSpd = 500.f;
+	m_originSpd = m_moveSpd = 1000.f;
 
 	m_damageTime = 0.f;
 
 	m_pos = GXY(GAMESIZE / 2, GAMESIZE / 2);
-	m_size = VEC2(0.7, 0.7);
 
 	m_radialTan = true;
 
 	//초기 무기 딜레이
-	m_fireDelay[0] = 1;
+	m_fireDelay[0] = 0.2;
 	m_fireDelay[1] = 0.3;
 	if (m_fire) m_fire->m_delay = m_fireDelay[m_radialTan];
 
@@ -63,7 +60,7 @@ void cPlayer::Update()
 	if (m_isDamaged) {
 		m_damageTime += D_TIME;
 		if (m_damageTime > 2.f) {
-			m_img->m_a = 255.f;
+			m_a = 255.f;
 			m_damageTime = 0.f;
 			m_isDamaged = false;
 		}
@@ -75,8 +72,9 @@ void cPlayer::Update()
 
 void cPlayer::Render()
 {
+	NoOutMap();
 	if (!m_isActive) return;
-	IMAGE->Render(m_img->m_text, m_pos, m_size, m_rot, true, m_img->m_color);
+	IMAGE->Render(m_img, m_pos, m_size, m_rot, true, D3DCOLOR_ARGB((int)m_a, 255, 255, 255));
 }
 
 void cPlayer::OnCollision(cObject* other)
@@ -89,89 +87,141 @@ void cPlayer::OnCollision(cObject* other)
 	}
 }
 
+void cPlayer::N_Way_Tan(string imageName, int n, int theta, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isRandShot, bool isHoming, bool isFaccel, bool isSaccel)
+{
+	float rot = D3DXToDegree(atan2(dir.y, dir.x));
+	float newRot;
+	int randShotX = 0, randShotY = 0;
+
+	if (n % 2) newRot = rot + (n / 2) * theta;
+	else newRot = rot + (n / 2) * theta - theta / 2;
+
+	for (size_t i = 0; i < n; ++i) {
+		if (isRandShot) {
+			randShotX = rand() % 50;
+			randShotY = rand() % 50;
+			dir.x = cos(D3DXToRadian(newRot + randShotX));
+			dir.y = sin(D3DXToRadian(newRot + randShotY));
+		}
+		else {
+			dir.x = cos(D3DXToRadian(newRot));
+			dir.y = sin(D3DXToRadian(newRot));
+		}
+		auto bullet = new cPlayerBullet(imageName, pos, dir, D3DXToDegree(atan2(dir.y, dir.x)) + 90, bulletSpd, size);
+		bullet->SetName("PlayerBullet");
+		bullet->m_atk = atk;
+		((cBulletManager*)OBJFIND(BULLET))->GetPlayerBullets().push_back(bullet);
+		newRot -= theta;
+	}
+}
+
+void cPlayer::N_Straight_Tan(string imageName, int n, int length, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isFaccel, bool isSaccel)
+{
+	float rot = D3DXToDegree(atan2(dir.y, dir.x));
+
+	if (n % 2) pos.x -= n / 2 * length;
+	else pos.x -= n / 2 * length - length / 2;
+
+	for (size_t i = 0; i < n; ++i) {
+		auto bullet = new cPlayerBullet(imageName, VEC2(pos.x + i * length, pos.y), dir, rot + 90, bulletSpd, size);
+		bullet->SetName("PlayerBullet");
+		bullet->m_atk = atk;
+		((cBulletManager*)OBJFIND(BULLET))->GetPlayerBullets().push_back(bullet);
+	}
+}
+
 void cPlayer::Dead()
 {
 	
-}
-
-void cPlayer::ChangeWeapon()
-{
-	//if (KEYDOWN(i)) {
-	//	m_nowWeapon = ;
-	//	m_fire->m_start = 0.f;
-	//	m_fire->m_delay = m_fireDelay[m_nowWeapon];
-	//}
 }
 
 void cPlayer::Move()
 {
 	if (!m_canMove) return;
 
-	if (KEYPRESS(VK_SHIFT)) m_moveSpd = m_originSpd * 0.5;
+	if (KEYPRESS(VK_SHIFT)) m_moveSpd = m_originSpd * 0.3;
 	else m_moveSpd = m_originSpd;
 
-	if (KEYPRESS(VK_LEFT)) {
-		m_pos.x -= m_moveSpd * D_TIME;
-	}
-	if (KEYPRESS(VK_RIGHT)) {
-		m_pos.x += m_moveSpd * D_TIME;
-	}
-	if (KEYPRESS(VK_UP)) {
-		m_pos.y -= m_moveSpd * D_TIME;
-	}
-	if (KEYPRESS(VK_DOWN)) {
-		m_pos.y += m_moveSpd * D_TIME;
-	}
+	if (KEYPRESS(VK_LEFT))  m_pos.x -= m_moveSpd * D_TIME;
+	if (KEYPRESS(VK_RIGHT)) m_pos.x += m_moveSpd * D_TIME;
+	if (KEYPRESS(VK_UP))	m_pos.y -= m_moveSpd * D_TIME;
+	if (KEYPRESS(VK_DOWN))  m_pos.y += m_moveSpd * D_TIME;
+	NoOutMap();
 }
 
 void cPlayer::Fire()
 {
 	if (KEYPRESS('Z')) {
-		char str[256] = "";
-		if (m_radialTan) sprintf(str, "Weapon0SND");
-		else  sprintf(str, "Weapon1SND");
-		SOUND->Copy(str);
-
 		m_waitFire = true;
+		SOUND->Play("PlayerBulletSND", false);
 
-		//auto bullet = (cBulletManager*)OBJFIND(BULLET);
-		//
-		//if (m_radialTan) {
-		//	switch (GAME->m_level) {
-		//	case 1:
-		//	case 2:
-		//		bullet->N_Way_Tan("PlayerBullet", "PlayerBullet0IMG", 3, 10, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 150.f, 0, false, false, false, true);
-		//		break;
-		//	case 3:
-		//		bullet->N_Way_Tan("PlayerBullet", "PlayerBullet0IMG", 5, 10, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 200.f, 0, false, false, false, true);
-		//		break;
-		//	case 4:
-		//		bullet->N_Way_Tan("PlayerBullet", "PlayerBullet0IMG", 8, 10, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 200.f, 0, false, false, false, true);
-		//		break;
-		//	case 5:
-		//		bullet->N_Way_Tan("PlayerBullet", "PlayerBullet0IMG", 8, 10, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 250.f, 0, false, false, false, true);
-		//		break;
-		//	}
-		//}
-		//else {
-		//	switch (GAME->m_level) {
-		//	case 1:
-		//		bullet->N_Straight_Tan("PlayerBullet", "PlayerBullet1IMG", 1, 10, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 500.f, 0, true);
-		//		break;
-		//	case 2:
-		//		bullet->N_Straight_Tan("PlayerBullet", "PlayerBullet1IMG", 2, 15, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 500.f, 0, true);
-		//		break;
-		//	case 3:
-		//		bullet->N_Straight_Tan("PlayerBullet", "PlayerBullet1IMG", 3, 20, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 800.f, 0, true);
-		//		break;
-		//	case 4:
-		//		bullet->N_Straight_Tan("PlayerBullet", "PlayerBullet1IMG", 3, 20, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 1000.f, 0, true);
-		//		break;
-		//	case 5:
-		//		bullet->N_Straight_Tan("PlayerBullet", "PlayerBullet1IMG", 4, 20, m_pos, VEC2(0, -1), VEC2(1.5, 1.5), 1000.f, 0, true);
-		//		break;
-		//	}
-		//}
+		if (m_radialTan) {
+			switch (GAME->m_level) {
+			case 1:
+				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 2:
+				N_Way_Tan("PlayerBulletIMG", 5, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 3:
+				N_Way_Tan("PlayerBulletIMG", 8, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 4:
+				N_Way_Tan("PlayerBulletIMG", 8, 7, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 5:
+				N_Way_Tan("PlayerBulletIMG", 8, 5, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			}
+		}
+		else {
+			switch (GAME->m_level) {
+			case 1:
+				N_Straight_Tan("PlayerBulletIMG", 1, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 2:
+				N_Straight_Tan("PlayerBulletIMG", 2, 20, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 3:
+				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 4:
+				N_Straight_Tan("PlayerBulletIMG", 3, 30, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			case 5:
+				N_Straight_Tan("PlayerBulletIMG", 5, 35, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, 0);
+				break;
+			}
+		}
+	}
+}
+
+void cPlayer::ChangeWeapon()
+{
+	if (KEYDOWN('C')) {
+		m_radialTan = !m_radialTan;
+		m_fire->m_start = 0.f;
+		m_fire->m_delay = m_fireDelay[m_radialTan];
+	}
+}
+
+void cPlayer::NoOutMap()
+{
+	if (KEYPRESS(VK_UP)) {
+		if(m_pos.y < 0)
+			m_pos.y = 0;
+	}
+	if (KEYPRESS(VK_DOWN)) {
+		if(m_pos.y > GAMESIZE)
+			m_pos.y = GAMESIZE;
+	}
+	if (KEYPRESS(VK_LEFT)) {
+		if(m_pos.x < GX(0))
+			m_pos.x = GX(0);
+	}
+	if (KEYPRESS(VK_RIGHT)) {
+		if(m_pos.x > GX(GAMESIZE))
+			m_pos.x = GX(GAMESIZE);
 	}
 }
 

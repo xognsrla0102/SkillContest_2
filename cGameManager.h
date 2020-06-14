@@ -11,10 +11,10 @@ public:
 	int m_expMax;
 	int m_nowExp;
 	int m_score;
-
 	int m_level;
-
-	int m_nowStage = 1;
+	int m_life;
+	int m_nowStage;
+	int m_story;
 
 	bool m_isNotDead;
 	bool m_isDebugInfo;

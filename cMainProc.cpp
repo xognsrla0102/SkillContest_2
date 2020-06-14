@@ -15,6 +15,8 @@ cMainProc::cMainProc()
 
 	IMAGE->AddTexture("IngamePlayerIMG", "resources/image/ingame/player.png");
 
+	IMAGE->AddTexture("PlayerBulletIMG", "resources/image/bullet/playerbullet.png");
+
 	IMAGE->AddTexture("Howto0IMG", "resources/image/howto/0.png");
 	IMAGE->AddTexture("Howto1IMG", "resources/image/howto/1.png");
 	IMAGE->AddTexture("Howto2IMG", "resources/image/howto/2.png");
@@ -26,6 +28,18 @@ cMainProc::cMainProc()
 
 	IMAGE->AddTexture("RedCircleEFFECT", "resources/image/effect/redcircle.png");
 
+	IMAGE->AddTexture("IngameBGUI", "resources/image/ui/ingame/bg.png");
+	IMAGE->AddTexture("IngameHP0UI", "resources/image/ui/ingame/0.png");
+	IMAGE->AddTexture("IngameHP1UI", "resources/image/ui/ingame/1.png");
+	IMAGE->AddTexture("IngameHP2UI", "resources/image/ui/ingame/2.png");
+	IMAGE->AddTexture("IngameHP3UI", "resources/image/ui/ingame/3.png");
+	IMAGE->AddTexture("IngameHP4UI", "resources/image/ui/ingame/4.png");
+	IMAGE->AddTexture("IngameEXPUI", "resources/image/ui/ingame/exp.png");
+
+	IMAGE->AddTexture("IngameSmokeIMG", "resources/image/ingame/%d.png", 4);
+
+	IMAGE->AddTexture("EnemyMeteorIMG", "resources/image/enemy/meteor.png");
+
 	SOUND->AddSound("TitleSND", L"resources/sound/title.wav");
 	SOUND->AddSound("TitleWarningSND", L"resources/sound/titlewarning.wav");
 	SOUND->AddSound("ExplosionSND", L"resources/sound/explosion.wav");
@@ -34,13 +48,20 @@ cMainProc::cMainProc()
 	SOUND->AddSound("StageEnterSND", L"resources/sound/stageenter.wav");
 	SOUND->AddSound("RedCircleSND", L"resources/sound/redcircle.wav");
 
+	SOUND->AddSound("StageSND", L"resources/sound/stage.wav");
+
+	SOUND->AddSound("PlayerBulletSND", L"resources/sound/playerbullet.wav");
+	//SCENE 매니저 생성자 호출
 	SCENE;
 
-	OBJECT->AddOBJ(new cPlayer(), PLAYER);
+	OBJECT->AddOBJ(new cPlayer(100), PLAYER);
+	OBJECT->AddOBJ(new cBulletManager, BULLET);
 
 	SCENE->AddScene("TitleScene", new cTitleScene);
 	SCENE->AddScene("HowtoScene", new cHowtoScene);
+	SCENE->AddScene("IntroScene", new cIntroScene);
 	SCENE->AddScene("IngameScene", new cIngameScene);
+
 	SCENE->ChangeScene("TitleScene", "None", 0);
 }
 
@@ -69,6 +90,11 @@ void cMainProc::Update()
 		CAMERA->m_size = VEC2(1, 1);
 		GAME->m_nowStage = 0;
 		SCENE->ChangeScene("TitleScene", "None", 0.f);
+	}
+	if (KEYDOWN(VK_F5)) {
+		CAMERA->m_size = VEC2(1, 1);
+		GAME->m_nowStage = 1;
+		SCENE->ChangeScene("IngameScene", "None", 0.f);
 	}
 
 	EFFECT->Update();

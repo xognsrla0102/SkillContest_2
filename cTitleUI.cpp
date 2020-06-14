@@ -46,7 +46,7 @@ void cTitleUI::Update()
 		SOUND->Play("SelectSND", false);
 		switch (m_nowBut) {
 		case 0:
-			SCENE->ChangeScene("IngameScene", "WhiteFade", 1.5);
+			SCENE->ChangeScene("IntroScene", "WhiteFade", 1.5);
 			break;
 		case 1:
 			SCENE->ChangeScene("HowtoScene", "BlackFade", 3);

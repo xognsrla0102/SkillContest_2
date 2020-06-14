@@ -2,26 +2,26 @@
 #include "cObject.h"
 class cBullet : public cObject
 {
-private:
-	float m_accel;
-	float m_bulletSpd;
+protected:
+	double m_bulletSpd;
+	double m_accel;
+	bool m_isHoming;
 public:
 	//유도 전용
 	VEC2 m_target;
 	VEC2 m_dir;
-	bool m_isFaccel = false;
-	bool m_isSaccel = false;
-	bool m_isHoming;
-	float m_atk;
+	double m_atk;
+	bool m_isFaccel;
+	bool m_isSaccel;
 public:
-	cBullet(const string& imageName, VEC2 pos, VEC2 dir, float rot, float bulletSpd, VEC2 size = VEC2(1, 1), bool isHoming = false, bool isFAccel = false, bool isSAccel = false);
+	cBullet(string imageName, VEC2 pos, VEC2 dir, double rot, VEC2 size = VEC2(1, 1));
 	virtual ~cBullet();
 
-	virtual void Update() override;
-	virtual void Render() override;
-	virtual void OnCollision(cObject* other);
+	virtual void Update() PURE;
+	void Render();
+	virtual void OnCollision(cObject* other) PURE;
 
-	void Dead();
+	virtual void Dead() PURE;
 	void Homing();
 };
 

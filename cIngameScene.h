@@ -1,22 +1,11 @@
 #pragma once
 #include "cScene.h"
-
-class cScroolMap;
 class cIngameScene : public cScene
 {
 private:
-	cTexture* m_bg = nullptr;
-	cImage* m_black = nullptr;
-	cImage* m_white = nullptr;
-	cImage* m_redCircle = nullptr;
-
-	cScroolMap* map = nullptr;
-
-	double late;
-
-	bool isIntro;
-	bool isCharge;
-	bool isReady;
+	cTimer* m_t = nullptr;
+	cScroolMap* m_map = nullptr;
+	int m_time;
 public:
 	cIngameScene();
 	virtual ~cIngameScene();
@@ -26,6 +15,6 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	void Intro();
+	void DrawMap();
 };
 

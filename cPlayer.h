@@ -1,7 +1,7 @@
 #pragma once
-#include "cObject.h"
+#include "cCharacter.h"
 
-class cPlayer : public cObject
+class cPlayer : public cCharacter
 {
 private:
 	FLOAT m_originSpd;
@@ -17,14 +17,11 @@ public:
 	bool m_isDamaged;
 	bool m_radialTan;
 
-	int m_hp;
-	int m_hpMax;
-
 	bool m_canMove;
 	bool m_waitFire;
 	bool m_isNoOutMap;
 public:
-	cPlayer();
+	cPlayer(int hp);
 	virtual ~cPlayer();
 
 	void Init();
@@ -34,10 +31,13 @@ public:
 	virtual void Render() override;
 	virtual void OnCollision(cObject* other) override;
 
-	void Dead();
+	virtual void N_Way_Tan(string imageName, int n, int theta, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isRandShot = false, bool isHoming = false, bool isFaccel = false, bool isSaccel = false) override;
+	virtual void N_Straight_Tan(string imageName, int n, int length, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isFaccel = false, bool isSaccel = false) override;
+
+	virtual void Dead() override;
+	virtual void Move() override;
+	virtual void Fire() override;
 	void ChangeWeapon();
-	void Move();
-	void Fire();
 	void NoOutMap();
 };
 

@@ -3,7 +3,7 @@
 class cObject abstract
 {
 protected:
-	cImage* m_img = nullptr;
+	cTexture* m_img = nullptr;
 	cAnimation* m_ani = nullptr;
 
 	VEC2 m_pos = VEC2(0, 0);
@@ -25,7 +25,7 @@ public:
 
 	bool OutMapChk(int offset = 0);
 
-	cTexture*	GetImg() { return m_img->m_text; }
+	cTexture*	GetImg() { return m_img; }
 	VEC2		GetPos() { return m_pos; }
 	VEC2		GetSize() { return m_size; }
 	FLOAT		GetRot() { return m_rot; }
@@ -39,7 +39,7 @@ public:
 	RECT		GetObjCollider();
 	RECT		GetCustomCollider(double n, VEC2 size = VEC2(1, 1));
 
-	void SetImg(cTexture* img)    { m_img->m_text = img; }
+	void SetImg(cTexture* img)    { m_img = img; }
 	void SetPos(VEC2 pos)		  { m_pos = pos; }
 	void SetSize(VEC2 size)		  { m_size = size; }
 	void SetRot(FLOAT rot)		  { m_rot = rot; }

@@ -3,7 +3,7 @@ class cScroolMap
 {
 private:
 	cImage* m_img1, *m_img2;
-	vector<cImage*> m_gas;
+	cImage* m_gas;
 	cTimer* m_createGas;
 public:
 	double m_mapSpd;

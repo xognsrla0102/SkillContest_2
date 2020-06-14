@@ -18,15 +18,15 @@ void cCameraManager::ResetCamera()
 	D3DXMatrixOrthoLH(&m_proj, WINSIZEX * m_size.x, -WINSIZEY * m_size.y, 0.f, 1.f);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &m_proj);
 	m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
+	m_size = VEC2(1, 1);
+	m_isShake = false;
 }
 
 void cCameraManager::Update()
 {
-	MATRIX t;
-	D3DXMatrixIdentity(&t);
+	D3DXMatrixIdentity(&m_view);
 	if (m_isShake) Shake();
-	D3DXMatrixTranslation(&t, -m_pos.x, -m_pos.y, 0.f);
-	m_view = t;
+	D3DXMatrixTranslation(&m_view, -m_pos.x, -m_pos.y, 0.f);
 }
 
 void cCameraManager::SetTransform()

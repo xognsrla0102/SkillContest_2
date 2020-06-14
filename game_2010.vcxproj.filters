@@ -153,14 +153,44 @@
     <Filter Include="0_core\scene\howto">
       <UniqueIdentifier>{b9644dfe-f0c4-4988-b088-130bb04cb802}</UniqueIdentifier>
     </Filter>
-    <Filter Include="0_core\scene\ingame">
-      <UniqueIdentifier>{af02fd93-590c-4f74-9822-502d752dc14e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="0_core\object\scrool">
       <UniqueIdentifier>{eebc4d82-2fbc-4b52-8a2a-02cc3d749bac}</UniqueIdentifier>
     </Filter>
     <Filter Include="0_core\manager\ui\ingameUI">
       <UniqueIdentifier>{ec509fee-ba19-486d-9164-645d8df9cca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\intro">
+      <UniqueIdentifier>{af02fd93-590c-4f74-9822-502d752dc14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\ingame">
+      <UniqueIdentifier>{4bf151d2-cf49-483a-90c9-c4a57e57d302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy">
+      <UniqueIdentifier>{bb814e72-fcd7-48f1-b3f7-8edf288d58b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\bullet\manager">
+      <UniqueIdentifier>{d9bb2f4e-9f02-4aa6-a988-7b8342e9d255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\bullet\bullet">
+      <UniqueIdentifier>{1f21a5bb-73d2-4e8a-ab96-e2bcbca94908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\bullet\playerBullet">
+      <UniqueIdentifier>{4f0f1aa8-310c-4eac-b44e-92d714f1c0ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\bullet\enemyBullet">
+      <UniqueIdentifier>{06e2ce06-85a7-4b62-9b67-855d962df216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\_character">
+      <UniqueIdentifier>{1609d34b-bba0-4d80-87f5-061935136e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\manager">
+      <UniqueIdentifier>{07a42e39-f21c-42fb-ac51-a195b43e5dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\enemy">
+      <UniqueIdentifier>{ee4b83ed-075d-43c2-9079-97d33b6b5a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\meteor">
+      <UniqueIdentifier>{103dd926-0e2a-4be0-9f15-a012c794b018}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -328,17 +358,38 @@
     <ClCompile Include="cHowtoScene.cpp">
       <Filter>0_core\scene\howto</Filter>
     </ClCompile>
-    <ClCompile Include="cIngameScene.cpp">
-      <Filter>0_core\scene\ingame</Filter>
-    </ClCompile>
     <ClCompile Include="cScroolMap.cpp">
       <Filter>0_core\object\scrool</Filter>
     </ClCompile>
     <ClCompile Include="cIngameUI.cpp">
       <Filter>0_core\manager\ui\ingameUI</Filter>
     </ClCompile>
+    <ClCompile Include="cIntroScene.cpp">
+      <Filter>0_core\scene\intro</Filter>
+    </ClCompile>
+    <ClCompile Include="cIngameScene.cpp">
+      <Filter>0_core\scene\ingame</Filter>
+    </ClCompile>
     <ClCompile Include="cBullet.cpp">
-      <Filter>0_core\object\bullet</Filter>
+      <Filter>0_core\object\bullet\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="cBulletManager.cpp">
+      <Filter>0_core\object\bullet\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayerBullet.cpp">
+      <Filter>0_core\object\bullet\playerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharacter.cpp">
+      <Filter>0_core\object\_character\_character</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemy.cpp">
+      <Filter>0_core\object\_character\enemy\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyManager.cpp">
+      <Filter>0_core\object\_character\enemy\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeteor.cpp">
+      <Filter>0_core\object\_character\enemy\meteor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -453,17 +504,38 @@
     <ClInclude Include="cHowtoScene.h">
       <Filter>0_core\scene\howto</Filter>
     </ClInclude>
-    <ClInclude Include="cIngameScene.h">
-      <Filter>0_core\scene\ingame</Filter>
-    </ClInclude>
     <ClInclude Include="cScroolMap.h">
       <Filter>0_core\object\scrool</Filter>
     </ClInclude>
     <ClInclude Include="cIngameUI.h">
       <Filter>0_core\manager\ui\ingameUI</Filter>
     </ClInclude>
+    <ClInclude Include="cIntroScene.h">
+      <Filter>0_core\scene\intro</Filter>
+    </ClInclude>
+    <ClInclude Include="cIngameScene.h">
+      <Filter>0_core\scene\ingame</Filter>
+    </ClInclude>
     <ClInclude Include="cBullet.h">
-      <Filter>0_core\object\bullet</Filter>
+      <Filter>0_core\object\bullet\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cBulletManager.h">
+      <Filter>0_core\object\bullet\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayerBullet.h">
+      <Filter>0_core\object\bullet\playerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharacter.h">
+      <Filter>0_core\object\_character\_character</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemy.h">
+      <Filter>0_core\object\_character\enemy\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemyManager.h">
+      <Filter>0_core\object\_character\enemy\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeteor.h">
+      <Filter>0_core\object\_character\enemy\meteor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -23,12 +23,16 @@ void cGameManager::StageInit()
 
 	m_level = 1;
 
+	m_life = 5;
+
 	m_isNotDead = false;
 }
 
 void cGameManager::Init()
 {
+	m_nowStage = 1;
 	m_score = 0;
+	m_story = 0;
 	m_isDebugInfo = false;
 	StageInit();
 }
@@ -40,42 +44,37 @@ void cGameManager::Update()
 
 	//레벨업  ------------------------------------------
 
-	//if (m_level < 5 && m_nowExp >= m_expMax) {
-	//	m_level++;
-	//	m_nowExp -= m_expMax;
-	//
-	//	auto player = (cPlayer*)OBJFIND(PLAYER);
-	//
-	//	switch (m_level) {
-	//	case 2:
-	//		m_expMax = 4000;
-	//		break;
-	//	case 3:
-	//		m_expMax = 5500;
-	//		break;
-	//	case 4:
-	//		m_expMax = 7000;
-	//		break;
-	//	}
-	//
-	//	if (m_level == 5) m_nowExp = 0;
-	//	player->m_hpMax += player->m_hp * 0.2;
-	//
-	//	for (int i = 0; i < 2; ++i) {
-	//		player->m_fireDelay[i] -= player->m_fireDelay[i] * 0.2f;
-	//		player->m_atk[i] += player->m_atk[i] * 0.2f;
-	//	}
-	//	if (player->m_nowWeapon != 2) player->m_fire->m_delay = player->m_fireDelay[player->m_nowWeapon];
-	//	player->m_hp = player->m_hpMax;
-	//
-	//	auto ingameUI = ((cIngameUI*)UI->FindUI("IngameSceneUI"));
-	//
-	//	ingameUI->m_targetPos = VEC2(688, 595);
-	//	Lerp(ingameUI->m_targetPos, VEC2(688, 399), (player->m_hpMax - player->m_hp) / (double)player->m_hpMax);
-	//
-	//	VEC2 pos = OBJFIND(PLAYER)->GetPos();
-	//	FONT->AddFont("Level UP!!!", VEC2(pos.x - 40, pos.y - 50), 1.f, true, D3DCOLOR_XRGB(255, 255, 0));
-	//}
+	if (m_level < 5 && m_nowExp >= m_expMax) {
+		m_level++;
+		m_nowExp -= m_expMax;
+	
+		auto player = (cPlayer*)OBJFIND(PLAYER);
+	
+		switch (m_level) {
+		case 2:
+			m_expMax = 4000;
+			break;
+		case 3:
+			m_expMax = 5500;
+			break;
+		case 4:
+			m_expMax = 7000;
+			break;
+		}
+	
+		if (m_level == 5) m_nowExp = 0;
+		player->m_hpMax += player->m_hp * 0.2;
+	
+		for (int i = 0; i < 2; ++i) {
+			player->m_fireDelay[i] -= player->m_fireDelay[i] * 0.2f;
+			player->m_atk[i] += player->m_atk[i] * 0.2f;
+		}
+		if (player->m_radialTan != 2) player->m_fire->m_delay = player->m_fireDelay[player->m_radialTan];
+		player->m_hp = player->m_hpMax;
+	
+		VEC2 pos = OBJFIND(PLAYER)->GetPos();
+		FONT->AddFont("Level UP!!!", VEC2(pos.x - 50, pos.y - 50), 30.f, 1, true, D3DCOLOR_XRGB(255, 255, 0));
+	}
 
 	//아이템 랜덤 생성 ------------------------------------------
 

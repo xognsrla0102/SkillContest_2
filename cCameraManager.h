@@ -11,9 +11,9 @@ public:
 	VEC2 m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
 	VEC2 m_size = VEC2(1, 1);
 
+	bool m_isShake = false;
 	double m_time;
 	int m_power;
-	bool m_isShake = false;
 public:
 	cCameraManager();
 	virtual ~cCameraManager();
