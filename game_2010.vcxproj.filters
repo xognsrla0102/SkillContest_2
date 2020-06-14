@@ -195,6 +195,12 @@
     <Filter Include="0_core\object\_character\enemy\turret">
       <UniqueIdentifier>{a582759f-9ee0-4e1a-b572-0da91a91f1b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\object\_character\enemy\rotate">
+      <UniqueIdentifier>{e3caad06-8852-453f-b155-ff5f00eba152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\path">
+      <UniqueIdentifier>{f91d0118-6c1e-4ae5-9080-55ecda25218b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -400,6 +406,9 @@
     <ClCompile Include="cEnemyBullet.cpp">
       <Filter>0_core\object\bullet\enemyBullet</Filter>
     </ClCompile>
+    <ClCompile Include="cRotate.cpp">
+      <Filter>0_core\object\_character\enemy\rotate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -551,6 +560,9 @@
     </ClInclude>
     <ClInclude Include="cEnemyBullet.h">
       <Filter>0_core\object\bullet\enemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cRotate.h">
+      <Filter>0_core\object\_character\enemy\rotate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

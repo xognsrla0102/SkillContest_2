@@ -76,6 +76,7 @@ enum TAGS {
 #include "cEnemy.h"
 #include "cMeteor.h"
 #include "cTurret.h"
+#include "cRotate.h"
 #include "cEnemyManager.h"
 
 void DEBUG_LOG(LPCSTR fmt, ...);

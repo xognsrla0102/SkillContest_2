@@ -416,6 +416,7 @@
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cPlayerBullet.cpp" />
+    <ClCompile Include="cRotate.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cScroolMap.cpp" />
@@ -461,6 +462,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cPlayerBullet.h" />
+    <ClInclude Include="cRotate.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cScroolMap.h" />

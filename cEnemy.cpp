@@ -58,4 +58,15 @@ void cEnemy::N_Straight_Tan(string imageName, int n, int length, VEC2 pos, VEC2 
 	}
 }
 
+bool cEnemy::CanFire()
+{
+	RECT world = {
+		GX(0),
+		GY(0),
+		GX(GAMESIZE),
+		GY(GAMESIZE)
+	};
+	return AABB(GetObjCollider(), world);
+}
+
 

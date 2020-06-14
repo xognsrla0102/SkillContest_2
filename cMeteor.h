@@ -9,9 +9,6 @@ public:
 	virtual ~cMeteor();
 
 	virtual void Update() override;
-	virtual void OnCollision(cObject* other) override {}
-
-	virtual void Dead() override;
 	virtual void Move() override;
 	virtual void Fire() override {}
 };

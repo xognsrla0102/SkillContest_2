@@ -17,6 +17,7 @@ void cPlayerBullet::Update()
 	for (auto iter : ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy())
 		if (iter->GetLive())
 			OnCollision(iter);
+	if (OutMapChk()) SetLive(false);
 }
 
 void cPlayerBullet::OnCollision(cObject* other)

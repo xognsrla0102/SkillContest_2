@@ -36,6 +36,8 @@ void cEnemyBullet::Update()
 		else m_accel -= D_TIME * 10;
 	}
 	m_pos += m_dir * m_bulletSpd * D_TIME * m_accel;
+
+	if (OutMapChk(100)) SetLive(false);
 }
 
 void cEnemyBullet::OnCollision(cObject* other)

@@ -22,10 +22,6 @@ void cMeteor::Update()
 	if(OutMapChk(200)) m_isLive = false;
 }
 
-void cMeteor::Dead()
-{
-}
-
 void cMeteor::Move()
 {
 	m_pos.y += m_downSpd * D_TIME;

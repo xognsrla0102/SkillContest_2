@@ -30,13 +30,13 @@ void cPlayer::Init()
 	m_radialTan = true;
 
 	//초기 무기 딜레이
-	m_fireDelay[0] = 0.15;
-	m_fireDelay[1] = 0.3;
+	m_fireDelay[0] = 0.1;
+	m_fireDelay[1] = 0.2;
 	if (m_fire) m_fire->m_delay = m_fireDelay[m_radialTan];
 
 	//초기 무기 공격력
-	m_atk[0] = 20;
-	m_atk[1] = 10;
+	m_atk[0] = 30;
+	m_atk[1] = 20;
 
 	m_isDamaged = false;
 	m_isLive = true;

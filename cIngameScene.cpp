@@ -54,6 +54,10 @@ void cIngameScene::DrawMap()
 
 		CreateMeteor(6, 10);
 		CreateTurret(6, 10);
+
+		//((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
+		//	new cRotate("EnemyRotateIMG", GXY(GAMESIZE / 2, GAMESIZE / 2), VEC2(1, 1))
+		//);
 	}
 }
 
@@ -65,7 +69,7 @@ void cIngameScene::CreateMeteor(int startGrid, int endGrid)
 	//한줄에 운석이 최대 10개 들갈 수 있음
 	for (int i = 0; i < num; ++i)
 		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
-			new cMeteor("EnemyMeteorIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), rand() % 36 * 10, 300)
+			new cMeteor("EnemyMeteorIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), rand() % 36 * 10, 200)
 		);
 }
 
@@ -75,7 +79,7 @@ void cIngameScene::CreateTurret(int startGrid, int endGrid)
 	int num = endGrid - startGrid + 1;
 	for (int i = 0; i < num; ++i)
 		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
-			new cTurret("EnemyTurretIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), 0, 300)
+			new cTurret("EnemyTurretIMG", VEC2(startPos.x + i * 105, startPos.y), VEC2(1.5, 1.5), 200)
 		);
 }
 

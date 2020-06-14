@@ -1,12 +1,12 @@
 #pragma once
 #include "cEnemy.h"
-class cTurret : public cEnemy
+class cRotate : public cEnemy
 {
 private:
-	double m_downSpd;
+	int rotDir;
 public:
-	cTurret(string name, VEC2 pos, VEC2 size, double downSpd);
-	virtual ~cTurret();
+	cRotate(string name, VEC2 pos, VEC2 size);
+	virtual ~cRotate();
 
 	virtual void Update() override;
 	virtual void Move() override;
