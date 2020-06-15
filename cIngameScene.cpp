@@ -20,7 +20,7 @@ void cIngameScene::Init()
 	OBJFIND(PLAYER)->SetActive(true);
 	((cPlayer*)OBJFIND(PLAYER))->Init();
 	m_map->Init();
-	m_time = 300;
+	m_time = 0;
 }
 
 void cIngameScene::Update()

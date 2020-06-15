@@ -6,7 +6,7 @@ class cMidBossScene : public cScene
 {
 private:
 	cTexture* m_map = nullptr;
-	cMidBoss* m_midBoss = nullptr;
+	cTexture* m_planet = nullptr;
 public:
 	cMidBossScene();
 	virtual ~cMidBossScene();

@@ -6,6 +6,7 @@ private:
 	cTexture* m_bg = nullptr;
 	cTexture* m_life = nullptr;
 	cTexture* m_exp = nullptr;
+	cTexture* m_bossHP = nullptr;
 public:
 	cImage* m_damage = nullptr;
 public:

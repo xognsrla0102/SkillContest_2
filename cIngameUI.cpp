@@ -6,6 +6,7 @@ cIngameUI::cIngameUI()
 	m_bg = IMAGE->FindTexture("IngameBGUI");
 	m_life = IMAGE->FindTexture("IngameHPUI");
 	m_exp = IMAGE->FindTexture("IngameEXPUI");
+	m_bossHP = IMAGE->FindTexture("IngameBossHPUI");
 
 	m_damage = new cImage;
 	m_damage->m_text = IMAGE->FindTexture("IngameDamageUI");
@@ -62,6 +63,17 @@ void cIngameUI::Render()
 	str2[6] = '\0';
 	IMAGE->CropRender(m_life, VEC2(10, 450), rt);
 	IMAGE->DrawFont("ÀÜ¿© Ã¼·Â : " + str2, VEC2(150, 380), "HY°ß°íµñ", 25);
+
+	auto midBoss = ((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss;
+
+	if (midBoss) {
+		rt = {
+			0, 0,
+			(LONG)(midBoss->m_hp / (double)midBoss->m_hpMax * m_bossHP->m_info.Width),
+			(LONG)m_bossHP->m_info.Height
+		};
+		IMAGE->CropRender(m_bossHP, GXY(0, 100), rt);
+	}
 
 	rt = {
 		0, 0,

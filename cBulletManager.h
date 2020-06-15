@@ -14,6 +14,7 @@ public:
 	virtual void Render() override;
 	virtual void OnCollision(cObject* other) override {}
 	void Reset();
+	void Release();
 
 	vector<cBullet*>& GetPlayerBullets() { return m_pBullet; }
 	vector<cBullet*>& GetEnemyBullets() { return m_eBullet; }

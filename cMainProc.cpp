@@ -33,6 +33,7 @@ cMainProc::cMainProc()
 
 	IMAGE->AddTexture("IngameBGUI", "resources/image/ui/ingame/bg.png");
 	IMAGE->AddTexture("IngameHPUI", "resources/image/ui/ingame/hp.png");
+	IMAGE->AddTexture("IngameBossHPUI", "resources/image/ui/ingame/bosshp.png");
 	IMAGE->AddTexture("IngameEXPUI", "resources/image/ui/ingame/exp.png");
 	IMAGE->AddTexture("IngameDamageUI", "resources/image/ui/ingame/damage.png");
 
@@ -65,6 +66,7 @@ cMainProc::cMainProc()
 	SOUND->AddSound("ChargeSND", L"resources/sound/charge.wav");
 	SOUND->AddSound("StageEnterSND", L"resources/sound/stageenter.wav");
 	SOUND->AddSound("RedCircleSND", L"resources/sound/redcircle.wav");
+	SOUND->AddSound("EnemyHitSND", L"resources/sound/enemyhit.wav");
 	SOUND->AddSound("EnemyDeadSND", L"resources/sound/enemydead.wav");
 	SOUND->AddSound("StageSND", L"resources/sound/stage.wav");
 	SOUND->AddSound("PlayerBulletSND", L"resources/sound/playerbullet.wav");

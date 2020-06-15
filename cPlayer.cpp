@@ -55,7 +55,7 @@ void cPlayer::Release()
 void cPlayer::Update()
 {
 	if (!m_isLive) { Dead(); return; }
-	else if (!m_isActive || !m_isLive) return;
+	else if (!m_isActive || !m_isLive || SCENE->m_isSceneChange) return;
 
 	Move();
 	ChangeWeapon();

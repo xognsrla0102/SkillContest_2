@@ -17,6 +17,11 @@ void cPlayerBullet::Update()
 	for (auto iter : ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy())
 		if (iter->GetLive())
 			OnCollision(iter);
+
+	auto boss = ((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss;
+	if (boss && boss->GetLive())
+		OnCollision(boss);
+
 	if (OutMapChk()) SetLive(false);
 }
 
@@ -26,10 +31,21 @@ void cPlayerBullet::OnCollision(cObject* other)
 
 	if (AABB(GetObjCollider(), other->GetObjCollider())) {
 		SetLive(false);
+		SOUND->Copy("EnemyHitSND");
 		VEC2 pos = other->GetPos();
 		EFFECT->AddEffect(new cEffect("DieEFFECT", 1, 0, pos, VEC2(0, 0), VEC2(1, 1), VEC2(1, 1), 1000));
 		((cEnemy*)other)->m_hp -= m_atk;
 		if (((cEnemy*)other)->m_hp <= 0) {
+			if (other->GetName() == "EnemyMidBoss") {
+				((cEnemy*)other)->m_hp = 0;
+				((cMidBoss*)other)->m_isDead = true;
+				return;
+			}
+			else if (other->GetName() == "EnemyBoss") {
+				((cEnemy*)other)->m_hp = 0;
+				//((cBoss*)other)->m_isDead = true;
+				return;
+			}
 			EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, pos, VEC2(0, 0)));
 			((cEnemy*)other)->SetLive(false);
 			CAMERA->SetShake(0.1, 10);

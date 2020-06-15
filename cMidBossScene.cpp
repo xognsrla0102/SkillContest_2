@@ -3,7 +3,7 @@
 
 cMidBossScene::cMidBossScene()
 {
-	m_midBoss = new cMidBoss;
+	m_planet = IMAGE->FindTexture("PlanetIMG");
 }
 
 cMidBossScene::~cMidBossScene()
@@ -17,27 +17,24 @@ void cMidBossScene::Init()
 	sprintf(str, "Stage%dBG", GAME->m_nowStage);
 	m_map = IMAGE->FindTexture(str);
 	GAME->m_story++;
-
 	OBJFIND(PLAYER)->SetActive(true);
 	OBJFIND(PLAYER)->SetPos(GXY(GAMESIZE / 2, GAMESIZE / 2));
 
-	m_midBoss->SetPos(GXY(GAMESIZE / 2, 200));
-	m_midBoss->SetSize(VEC2(2.5, 2.5));
+	((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss = new cMidBoss;
 }
 
 void cMidBossScene::Update()
 {
-	m_midBoss->Update();
 }
 
 void cMidBossScene::Render()
 {
 	IMAGE->Render(m_map, VEC2(0, 0));
-	m_midBoss->Render();
+	IMAGE->Render(m_planet, GXY(0, 0), VEC2(0.5, 0.5));
 }
 
 void cMidBossScene::Release()
 {
 	OBJFIND(PLAYER)->SetActive(false);
-	SAFE_DELETE(m_midBoss);
+	SAFE_DELETE(((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss);
 }

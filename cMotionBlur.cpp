@@ -3,7 +3,7 @@
 
 cMotionBlur::cMotionBlur(int blurCnt, VEC2 nowPos)
 {
-	m_computeBlur = new cTimer(0.3);
+	m_computeBlur = new cTimer(0.05);
 
 	double alpha = 255.0 / (blurCnt + 1);
 	for (size_t i = 0; i < blurCnt; i++) {

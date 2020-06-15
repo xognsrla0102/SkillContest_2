@@ -86,7 +86,7 @@ void cMidBossEnterScene::Render()
 
 	IMAGE->Render(m_planet->m_text, m_planet->m_pos, VEC2(0.8, 0.8), 0, true);
 	IMAGE->Render(m_player->m_text, m_player->m_pos, VEC2(1, 1), 0, true);
-	IMAGE->Render(m_midBoss, GXY(GAMESIZE / 2, 500), VEC2(3, 3), 0, true, D3DCOLOR_ARGB(m_bossAlpha, 255, 255, 255));
+	IMAGE->Render(m_midBoss, GXY(GAMESIZE / 2, 550), VEC2(3, 3), 0, true, D3DCOLOR_ARGB(m_bossAlpha, 255, 255, 255));
 
 	IMAGE->Render(m_white, VEC2(0, 0), VEC2(1, 1), 0, false, D3DCOLOR_ARGB(m_alpha, 255, 255, 255));
 
