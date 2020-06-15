@@ -19,8 +19,7 @@ public:
 	bool m_isNotDead;
 	bool m_isDebugInfo;
 
-	bool m_isMidBoss;
-	bool m_isBoss;
+	bool m_isBehind;
 public:
 	cGameManager();
 	virtual ~cGameManager();

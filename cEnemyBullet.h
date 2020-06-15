@@ -7,7 +7,7 @@ public:
 	virtual ~cEnemyBullet();
 
 	virtual void Update() override;
-	virtual void OnCollision(cObject* other) override;
 	virtual void Dead() override;
+	virtual void OnCollision(cObject* other) override {}
 };
 

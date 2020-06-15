@@ -15,9 +15,6 @@ void cGameManager::StageInit()
 	OLD_TIME_SCALE = 1.0;
 	TIME_SCALE = 1.0;
 
-	m_isBoss = false;
-	m_isMidBoss = false;
-
 	m_expMax = 2500;
 	m_nowExp = 0;
 
@@ -34,6 +31,7 @@ void cGameManager::Init()
 	m_score = 0;
 	m_story = 0;
 	m_isDebugInfo = false;
+	m_isBehind = true;
 	StageInit();
 }
 

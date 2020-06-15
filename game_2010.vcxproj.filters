@@ -201,6 +201,21 @@
     <Filter Include="0_core\object\path">
       <UniqueIdentifier>{f91d0118-6c1e-4ae5-9080-55ecda25218b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\object\_character\enemy\razer">
+      <UniqueIdentifier>{b830ee12-1ce1-4f1b-a26b-b927be17f0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\circle">
+      <UniqueIdentifier>{b9a75234-10e4-4341-ac49-e0f10f40d4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\midbossenter">
+      <UniqueIdentifier>{d7ad207c-e333-4d01-b613-da1ac3216ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\MidBoss">
+      <UniqueIdentifier>{cbd86627-c522-4749-a15d-f527680b3215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\midBoss">
+      <UniqueIdentifier>{b4d3bd8e-0c5e-46ed-a6db-ab0d3a39a99d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -409,6 +424,24 @@
     <ClCompile Include="cRotate.cpp">
       <Filter>0_core\object\_character\enemy\rotate</Filter>
     </ClCompile>
+    <ClCompile Include="cPath.cpp">
+      <Filter>0_core\object\path</Filter>
+    </ClCompile>
+    <ClCompile Include="cRazer.cpp">
+      <Filter>0_core\object\_character\enemy\razer</Filter>
+    </ClCompile>
+    <ClCompile Include="cCircle.cpp">
+      <Filter>0_core\object\_character\enemy\circle</Filter>
+    </ClCompile>
+    <ClCompile Include="cMidBossEnterScene.cpp">
+      <Filter>0_core\scene\midbossenter</Filter>
+    </ClCompile>
+    <ClCompile Include="cMidBossScene.cpp">
+      <Filter>0_core\scene\MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="cMidBoss.cpp">
+      <Filter>0_core\object\_character\enemy\midBoss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -563,6 +596,24 @@
     </ClInclude>
     <ClInclude Include="cRotate.h">
       <Filter>0_core\object\_character\enemy\rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="cPath.h">
+      <Filter>0_core\object\path</Filter>
+    </ClInclude>
+    <ClInclude Include="cRazer.h">
+      <Filter>0_core\object\_character\enemy\razer</Filter>
+    </ClInclude>
+    <ClInclude Include="cCircle.h">
+      <Filter>0_core\object\_character\enemy\circle</Filter>
+    </ClInclude>
+    <ClInclude Include="cMidBossEnterScene.h">
+      <Filter>0_core\scene\midbossenter</Filter>
+    </ClInclude>
+    <ClInclude Include="cMidBossScene.h">
+      <Filter>0_core\scene\MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="cMidBoss.h">
+      <Filter>0_core\object\_character\enemy\midBoss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

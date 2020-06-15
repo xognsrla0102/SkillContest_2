@@ -32,7 +32,7 @@ void cUIManager::Update()
 		find = m_UIs.find("TitleSceneUI");
 		isChangeUI = true;
 	}
-	else if (sceneName == "IngameScene") {
+	else if (sceneName == "IngameScene" || sceneName == "MidBossScene") {
 		find = m_UIs.find("IngameSceneUI");
 		isChangeUI = true;
 	}
@@ -58,6 +58,7 @@ void cUIManager::Update()
 void cUIManager::Render()
 {
 	if (m_now) m_now->Render();
+	IMAGE->DrawFont(to_string(DXUTGetFPS()), VEC2(1800, 900));
 }
 
 cUI* cUIManager::FindUI(string name)

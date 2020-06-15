@@ -40,10 +40,6 @@ void cEnemyBullet::Update()
 	if (OutMapChk(100)) SetLive(false);
 }
 
-void cEnemyBullet::OnCollision(cObject* other)
-{
-}
-
 void cEnemyBullet::Dead()
 {
 }

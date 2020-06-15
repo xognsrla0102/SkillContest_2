@@ -33,19 +33,19 @@ void cIngameUI::Render()
 	IMAGE->Render(m_damage->m_text, GXY(-3, -3), VEC2(1, 1), 0, false, m_damage->m_color);
 
 	IMAGE->Render(m_bg, VEC2(0, 0));
-	if(((cPlayer*)OBJFIND(PLAYER))->m_radialTan) IMAGE->DrawFont(": RADIATION", VEC2(1650, 430), "HY태백B", 30);
-	else IMAGE->DrawFont(": STRAIGHT", VEC2(1650, 430), "HY태백B", 30);
+	if(((cPlayer*)OBJFIND(PLAYER))->m_radialTan) IMAGE->DrawFont(": RADIATION", VEC2(1650, 430), "HY견고딕", 30);
+	else IMAGE->DrawFont(": STRAIGHT", VEC2(1650, 430), "HY견고딕", 30);
 
 	char str[3][256] = {
 		": AVOID ENEMY BULLET",
 		": DESTROY THE PLANET",
 		": DESTROY THE BOSS"
 	};
-	IMAGE->DrawFont(str[GAME->m_story], VEC2(50, 200), "HY태백B", 30);
+	IMAGE->DrawFont(str[GAME->m_story], VEC2(50, 200), "HY견고딕", 25);
 
 	char tmp[256];
 	sprintf(tmp, "%07d", GAME->m_score);
-	IMAGE->DrawFont(tmp, VEC2(1550, 130), "HY태백B", 70);
+	IMAGE->DrawFont(tmp, VEC2(1550, 130), "HY견고딕", 70);
 
 	auto player = (cPlayer*)OBJFIND(PLAYER);
 
@@ -60,8 +60,8 @@ void cIngameUI::Render()
 	string str2 = to_string(result);
 	str2[5] = '%';
 	str2[6] = '\0';
-	IMAGE->CropRender(m_life, VEC2(10, 430), rt);
-	IMAGE->DrawFont("잔여 체력 : " + str2, VEC2(150, 380), "HY태백B", 25);
+	IMAGE->CropRender(m_life, VEC2(10, 450), rt);
+	IMAGE->DrawFont("잔여 체력 : " + str2, VEC2(150, 380), "HY견고딕", 25);
 
 	rt = {
 		0, 0,
@@ -74,8 +74,8 @@ void cIngameUI::Render()
 	str2[6] = '\0';
 
 	IMAGE->CropRender(m_exp, VEC2(16, 778), rt);
-	IMAGE->DrawFont("현재 경험치 : " + str2, VEC2(200, 720), "HY태백B", 20);
-	IMAGE->DrawFont(to_string(GAME->m_level), VEC2(110, 830), "HY태백B", 20);
+	IMAGE->DrawFont("현재 경험치 : " + str2, VEC2(200, 720), "HY견고딕", 20);
+	IMAGE->DrawFont(to_string(GAME->m_level), VEC2(110, 830), "HY견고딕", 20);
 }
 
 void cIngameUI::Release()

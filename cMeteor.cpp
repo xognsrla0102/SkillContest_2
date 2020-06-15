@@ -1,14 +1,14 @@
 #include "DXUT.h"
 #include "cMeteor.h"
 
-cMeteor::cMeteor(string name, VEC2 pos, VEC2 size, double rot, double downSpd)
+cMeteor::cMeteor(VEC2 pos, double rot, double downSpd)
 	: cEnemy(0, 5), m_downSpd(downSpd)
 {
-	m_img = IMAGE->FindTexture(name);
+	m_img = IMAGE->FindTexture("EnemyMeteorIMG");
 
 	m_objName = "EnemyMeteor";
 	m_pos = pos;
-	m_size = size;
+	m_size = VEC2(1.5, 1.5);
 	m_rot = rot;
 }
 

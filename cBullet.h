@@ -3,9 +3,9 @@
 class cBullet abstract : public cObject
 {
 protected:
-	double m_bulletSpd;
-	double m_accel;
 	bool m_isHoming;
+	double m_accel;
+	double m_bulletSpd;
 public:
 	//유도 전용
 	VEC2 m_target;

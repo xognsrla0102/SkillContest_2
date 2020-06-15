@@ -1,18 +1,18 @@
 #include "DXUT.h"
 #include "cRotate.h"
 
-cRotate::cRotate(string name, VEC2 pos, VEC2 size)
+cRotate::cRotate(VEC2 pos)
 	: cEnemy(10 + 20 * GAME->m_level, 5)
 {
 	rotDir = rand() % 2 ? 1 : -1;
 
-	//m_path = new cPath();
-
-	m_img = IMAGE->FindTexture(name);
+	char str[256];
+	sprintf(str, "EnemyRotate%dIMG", GAME->m_nowStage);
+	m_img = IMAGE->FindTexture(str);
 
 	m_objName = "EnemyRotate";
 	m_pos = pos;
-	m_size = size;
+	m_size = VEC2(1, 1);
 	m_rot = 0;
 
 	m_bulletDelay = 1 + rand() % 10 / 10.f;
@@ -43,6 +43,36 @@ void cRotate::Update()
 
 void cRotate::Move()
 {
+	cPointInfo nowPath = m_path->m_endPoint[m_path->m_nowPos];
+	VEC2 dir = nowPath.m_pos - m_pos;
+	D3DXVec2Normalize(&dir, &dir);
+	float moveDist = D3DXVec2Length(&(dir * nowPath.m_speed * D_TIME));
+	moveDist *= m_isAccelCurve ? m_accelCurve : 1;
+
+	bool cngNextPoint = m_path->Update(m_pos, moveDist);
+	if (m_path->m_isDone) {
+		m_isLive = false;
+		return;
+	}
+	if (cngNextPoint) {
+		if (m_path->m_nowPos != 0) m_pos = m_path->m_endPoint[m_path->m_nowPos - 1].m_pos;
+		else m_pos = m_path->m_endPoint[0].m_pos;
+	}
+
+	nowPath = m_path->m_endPoint[m_path->m_nowPos];
+	if (nowPath.m_isCurve == false) Lerp(m_pos, nowPath.m_pos, nowPath.m_speed);
+	else {
+		VEC2 dir = nowPath.m_pos - m_pos;
+		D3DXVec2Normalize(&dir, &dir);
+		if (m_isAccelCurve == TRUE) {
+			if (m_accelCurve < 1.f) m_accelCurve += D_TIME / m_divDelta;
+			else m_accelCurve = 1.f;
+			m_pos += dir * nowPath.m_speed * D_TIME * m_accelCurve;
+		}
+		else {
+			m_pos += dir * nowPath.m_speed * D_TIME;
+		}
+	}
 }
 
 void cRotate::Fire()

@@ -35,7 +35,7 @@ void cScroolMap::Init()
 	m_img2->m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
 
 	m_mapSpd = 100;
-	m_gasSpd = 7000;
+	m_gasSpd = 3000;
 }
 
 void cScroolMap::Update()

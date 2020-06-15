@@ -5,7 +5,7 @@ class cTurret : public cEnemy
 private:
 	double m_downSpd;
 public:
-	cTurret(string name, VEC2 pos, VEC2 size, double downSpd);
+	cTurret(VEC2 pos, double downSpd);
 	virtual ~cTurret();
 
 	virtual void Update() override;

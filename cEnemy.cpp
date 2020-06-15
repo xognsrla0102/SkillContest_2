@@ -17,8 +17,8 @@ void cEnemy::Render()
 
 void cEnemy::N_Way_Tan(string imageName, int n, int theta, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isRandShot, bool isHoming, bool isFaccel, bool isSaccel)
 {
-	float rot = D3DXToDegree(atan2(dir.y, dir.x));
-	float newRot;
+	double rot = D3DXToDegree(atan2(dir.y, dir.x));
+	double newRot;
 	int randShotX = 0, randShotY = 0;
 
 	if (n % 2) newRot = rot + (n / 2) * theta;
@@ -40,12 +40,13 @@ void cEnemy::N_Way_Tan(string imageName, int n, int theta, VEC2 pos, VEC2 dir, V
 		bullet->m_atk = atk;
 		((cBulletManager*)OBJFIND(BULLET))->GetEnemyBullets().push_back(bullet);
 		newRot -= theta;
+		if (newRot < 0) newRot += 360;
 	}
 }
 
 void cEnemy::N_Straight_Tan(string imageName, int n, int length, VEC2 pos, VEC2 dir, VEC2 size, float bulletSpd, float atk, bool isFaccel, bool isSaccel)
 {
-	float rot = D3DXToDegree(atan2(dir.y, dir.x));
+	double rot = D3DXToDegree(atan2(dir.y, dir.x));
 
 	if (n % 2) pos.x -= n / 2 * length;
 	else pos.x -= n / 2 * length - length / 2;

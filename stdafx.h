@@ -54,6 +54,8 @@ enum TAGS {
 #include "cHowtoScene.h"
 #include "cIntroScene.h"
 #include "cIngameScene.h"
+#include "cMidBossEnterScene.h"
+#include "cMidBossScene.h"
 #include "cSceneManager.h"
 #include "cFontManager.h"
 #include "cButton.h"
@@ -67,6 +69,7 @@ enum TAGS {
 #include "cItemManager.h"
 #include "cMotionInfo.h"
 #include "cMotionBlur.h"
+#include "cPath.h"
 #include "cPlayer.h"
 #include "cScroolMap.h"
 #include "cBullet.h"
@@ -77,6 +80,9 @@ enum TAGS {
 #include "cMeteor.h"
 #include "cTurret.h"
 #include "cRotate.h"
+#include "cRazer.h"
+#include "cCircle.h"
+#include "cMidBoss.h"
 #include "cEnemyManager.h"
 
 void DEBUG_LOG(LPCSTR fmt, ...);

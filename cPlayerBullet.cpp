@@ -26,8 +26,22 @@ void cPlayerBullet::OnCollision(cObject* other)
 
 	if (AABB(GetObjCollider(), other->GetObjCollider())) {
 		SetLive(false);
+		VEC2 pos = other->GetPos();
+		EFFECT->AddEffect(new cEffect("DieEFFECT", 1, 0, pos, VEC2(0, 0), VEC2(1, 1), VEC2(1, 1), 1000));
 		((cEnemy*)other)->m_hp -= m_atk;
-		if (((cEnemy*)other)->m_hp <= 0) ((cEnemy*)other)->SetLive(false);
+		if (((cEnemy*)other)->m_hp <= 0) {
+			EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, pos, VEC2(0, 0)));
+			((cEnemy*)other)->SetLive(false);
+			CAMERA->SetShake(0.1, 10);
+			SOUND->Copy("EnemyDeadSND");
+			for (size_t j = 0; j < ((cEnemy*)other)->GetItemName().size(); j++) {
+				string nowItemName = ((cEnemy*)other)->GetItemName()[j];
+				((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
+					new cItem(nowItemName, pos, VEC2(pos.x, pos.y - (40 + rand() % 30)))
+				);
+			}
+			GAME->m_nowExp += 50 + rand() % 3 * 30;
+		}
 	}
 }
 

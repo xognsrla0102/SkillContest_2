@@ -1,17 +1,17 @@
 #include "DXUT.h"
 #include "cTurret.h"
 
-cTurret::cTurret(string name, VEC2 pos, VEC2 size, double downSpd)
-	: cEnemy(20 * GAME->m_level, 5), m_downSpd(downSpd)
+cTurret::cTurret(VEC2 pos, double downSpd)
+	: cEnemy(20 + 20 * GAME->m_level, 5 * GAME->m_nowStage), m_downSpd(downSpd)
 {
-	m_img = IMAGE->FindTexture(name);
+	m_img = IMAGE->FindTexture("EnemyTurretIMG");
 
 	m_objName = "EnemyTurret";
 	m_pos = pos;
-	m_size = size;
+	m_size = VEC2(1.5, 1.5);
 	m_rot = 0;
 
-	m_bulletDelay = 2.5 + rand() % 20 / 10.f;
+	m_bulletDelay = 1 + rand() % 20 / 10.f;
 	m_bulletTime = m_bulletDelay + 1;
 }
 
@@ -43,5 +43,5 @@ void cTurret::Fire()
 {
 	VEC2 dir = OBJFIND(PLAYER)->GetPos() - m_pos;
 	D3DXVec2Normalize(&dir, &dir);
-	N_Straight_Tan("EnemyBullet0IMG", 1, 10, m_pos, dir, VEC2(1, 1), 400, m_atk);
+	N_Straight_Tan("EnemyBullet0IMG", 1, 10, m_pos, dir, VEC2(1, 1), 800, m_atk);
 }

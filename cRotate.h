@@ -5,7 +5,7 @@ class cRotate : public cEnemy
 private:
 	int rotDir;
 public:
-	cRotate(string name, VEC2 pos, VEC2 size);
+	cRotate(VEC2 pos);
 	virtual ~cRotate();
 
 	virtual void Update() override;

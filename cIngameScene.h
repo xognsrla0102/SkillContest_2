@@ -15,8 +15,10 @@ public:
 	virtual void Render() override;
 	virtual void Release() override;
 
-	void DrawMap();
-	void CreateMeteor(int startGrid, int endGrid);
-	void CreateTurret(int startGrid, int endGrid);
+	void LevelDesign();
+	void CreateMeteor(int startGrid, int endGrid, int speed);
+	void CreateTurret(int startGrid, int endGrid, int speed);
+	void CreateCircle(int startGrid, int endGrid, int speed);
+	void CreateRazer(int startGrid, int endGrid);
 };
 

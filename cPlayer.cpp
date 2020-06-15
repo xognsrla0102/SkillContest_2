@@ -74,6 +74,9 @@ void cPlayer::Update()
 	for (auto iter : ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy())
 		if(iter->GetLive())
 			OnCollision(iter);
+	for (auto iter : ((cBulletManager*)OBJFIND(BULLET))->GetEnemyBullets())
+		if (iter->GetLive())
+			OnCollision(iter);
 }
 
 void cPlayer::Render()
@@ -89,12 +92,12 @@ void cPlayer::OnCollision(cObject* other)
 
 	if (AABB(GetCustomCollider(3), other->GetObjCollider())) {
 		CAMERA->SetShake(0.2, 30);
-		if (other->GetName() == "EnemyMeteor") {
-			m_hp -= ((cEnemy*)other)->m_atk;
-		}
-		SOUND->Copy("PlayerHitSND");
+		if (other->GetName() != "EnemyBullet") m_hp -= ((cEnemy*)other)->m_atk;
+		else m_hp -= ((cBullet*)other)->m_atk;
+		SOUND->Copy("PlayerDamageSND");
 		auto ingameUI = ((cIngameUI*)UI->FindUI("IngameSceneUI"));
 		ingameUI->m_damage->m_a = 255;
+		((cBulletManager*)OBJFIND(BULLET))->Reset();
 
 		if (m_hp < 0) m_hp = 0;
 		m_isDamaged = true;

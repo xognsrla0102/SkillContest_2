@@ -29,6 +29,7 @@ cMainProc::cMainProc()
 
 	IMAGE->AddTexture("RedCircleEFFECT", "resources/image/effect/redcircle.png");
 	IMAGE->AddTexture("DieEFFECT", "resources/image/effect/die.png");
+	IMAGE->AddTexture("ExplosionEFFECT", "resources/image/effect/explosion/%d.png", 32);
 
 	IMAGE->AddTexture("IngameBGUI", "resources/image/ui/ingame/bg.png");
 	IMAGE->AddTexture("IngameHPUI", "resources/image/ui/ingame/hp.png");
@@ -36,14 +37,26 @@ cMainProc::cMainProc()
 	IMAGE->AddTexture("IngameDamageUI", "resources/image/ui/ingame/damage.png");
 
 	IMAGE->AddTexture("IngameSmokeIMG", "resources/image/ingame/%d.png", 4);
+	IMAGE->AddTexture("ChargeRazerIMG", "resources/image/effect/chargeRazerEffect/%d.png", 24);
 
 	IMAGE->AddTexture("EnemyMeteorIMG", "resources/image/enemy/meteor.png");
 	IMAGE->AddTexture("EnemyTurretIMG", "resources/image/enemy/turret.png");
+	IMAGE->AddTexture("EnemyRazerIMG", "resources/image/enemy/razer.png");
+
+	IMAGE->AddTexture("PlanetIMG", "resources/image/enemy/planet.png");
+
+	IMAGE->AddTexture("EnemyCircle0IMG", "resources/image/enemy/0_circle.png");
+	IMAGE->AddTexture("EnemyCircle1IMG", "resources/image/enemy/1_circle.png");
+
+	IMAGE->AddTexture("EnemyMidBoss0IMG", "resources/image/enemy/0_midboss.png");
+	IMAGE->AddTexture("EnemyMidBoss1IMG", "resources/image/enemy/1_midboss.png");
 
 	IMAGE->AddTexture("EnemyBullet0IMG", "resources/image/bullet/enemybullet0.png");
 	IMAGE->AddTexture("EnemyBullet1IMG", "resources/image/bullet/enemybullet1.png");
 	IMAGE->AddTexture("EnemyBullet2IMG", "resources/image/bullet/enemybullet2.png");
 	IMAGE->AddTexture("EnemyBullet3IMG", "resources/image/bullet/enemybullet3.png");
+	IMAGE->AddTexture("EnemyRazer0IMG", "resources/image/bullet/enemyrazer0.png");
+	IMAGE->AddTexture("EnemyRazer1IMG", "resources/image/bullet/enemyrazer1.png");
 
 	SOUND->AddSound("TitleSND", L"resources/sound/title.wav");
 	SOUND->AddSound("TitleWarningSND", L"resources/sound/titlewarning.wav");
@@ -52,10 +65,12 @@ cMainProc::cMainProc()
 	SOUND->AddSound("ChargeSND", L"resources/sound/charge.wav");
 	SOUND->AddSound("StageEnterSND", L"resources/sound/stageenter.wav");
 	SOUND->AddSound("RedCircleSND", L"resources/sound/redcircle.wav");
-
+	SOUND->AddSound("EnemyDeadSND", L"resources/sound/enemydead.wav");
 	SOUND->AddSound("StageSND", L"resources/sound/stage.wav");
-
 	SOUND->AddSound("PlayerBulletSND", L"resources/sound/playerbullet.wav");
+	SOUND->AddSound("PlayerDamageSND", L"resources/sound/playerdamage.wav");
+	SOUND->AddSound("RazerChargeSND", L"resources/sound/razer_charge.wav");
+	SOUND->AddSound("RazerFireSND", L"resources/sound/razer_fire.wav");
 	//SCENE 매니저 생성자 호출
 	SCENE;
 
@@ -68,6 +83,8 @@ cMainProc::cMainProc()
 	SCENE->AddScene("HowtoScene", new cHowtoScene);
 	SCENE->AddScene("IntroScene", new cIntroScene);
 	SCENE->AddScene("IngameScene", new cIngameScene);
+	SCENE->AddScene("MidBossEnterScene", new cMidBossEnterScene);
+	SCENE->AddScene("MidBossScene", new cMidBossScene);
 
 	SCENE->ChangeScene("TitleScene", "None", 0);
 }
@@ -101,11 +118,13 @@ void cMainProc::Update()
 	if (KEYDOWN(VK_F5)) {
 		CAMERA->m_size = VEC2(1, 1);
 		GAME->m_nowStage = 1;
+		GAME->m_story = 0;
 		SCENE->ChangeScene("IngameScene", "None", 0.f);
 	}
 	if (KEYDOWN(VK_F6)) {
 		CAMERA->m_size = VEC2(1, 1);
 		GAME->m_nowStage = 2;
+		GAME->m_story = 0;
 		SCENE->ChangeScene("IngameScene", "None", 0.f);
 	}
 
