@@ -5,7 +5,7 @@ cCircle::cCircle(VEC2 pos, double downSpd)
 	: cEnemy(100 + 20 * GAME->m_level, 5), m_downSpd(downSpd)
 {
 	char str[256];
-	sprintf(str, "EnemyCircle%dIMG", GAME->m_nowStage);
+	sprintf(str, "EnemyCircle%dIMG", GAME->m_nowStage - 1);
 	m_img = IMAGE->FindTexture(str);
 
 	m_objName = "EnemyCircle";
@@ -41,5 +41,5 @@ void cCircle::Move()
 
 void cCircle::Fire()
 {
-	N_Way_Tan("EnemyBullet2IMG", 6, 60, m_pos, VEC2(0, -1), VEC2(1, 1), 100, m_atk, false, false, false, true);
+	N_Way_Tan("EnemyBullet2IMG", 3, 120, m_pos, VEC2(0, -1), VEC2(1, 1), 100, m_atk, false, false, false, true);
 }

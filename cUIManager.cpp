@@ -6,6 +6,7 @@ cUIManager::cUIManager()
 {
 	m_UIs["TitleSceneUI"] = new cTitleUI;
 	m_UIs["IngameSceneUI"] = new cIngameUI;
+	m_UIs["MidBossClearSceneUI"] = new cMidBossClearUI;
 }
 
 cUIManager::~cUIManager()
@@ -34,6 +35,10 @@ void cUIManager::Update()
 	}
 	else if (sceneName == "IngameScene" || sceneName == "MidBossScene") {
 		find = m_UIs.find("IngameSceneUI");
+		isChangeUI = true;
+	}
+	else if (sceneName == "MidBossClearScene") {
+		find = m_UIs.find("MidBossClearSceneUI");
 		isChangeUI = true;
 	}
 	else {

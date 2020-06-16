@@ -34,8 +34,14 @@ void cScroolMap::Init()
 	m_img1->m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2 - (double)m_img2->m_text->m_info.Height);
 	m_img2->m_pos = VEC2(WINSIZEX / 2, WINSIZEY / 2);
 
-	m_mapSpd = 100;
-	m_gasSpd = 3000;
+	if (GAME->m_isBehind) {
+		m_mapSpd = 100;
+		m_gasSpd = 1000;
+	}
+	else {
+		m_mapSpd = 300;
+		m_gasSpd = 1000;
+	}
 }
 
 void cScroolMap::Update()

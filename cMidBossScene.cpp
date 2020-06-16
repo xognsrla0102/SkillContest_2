@@ -16,7 +16,7 @@ void cMidBossScene::Init()
 	char str[256];
 	sprintf(str, "Stage%dBG", GAME->m_nowStage);
 	m_map = IMAGE->FindTexture(str);
-	GAME->m_story++;
+	GAME->m_story = 1;
 	OBJFIND(PLAYER)->SetActive(true);
 	OBJFIND(PLAYER)->SetPos(GXY(GAMESIZE / 2, GAMESIZE / 2));
 

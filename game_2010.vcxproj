@@ -410,6 +410,8 @@
     <ClCompile Include="cMainProc.cpp" />
     <ClCompile Include="cMeteor.cpp" />
     <ClCompile Include="cMidBoss.cpp" />
+    <ClCompile Include="cMidBossClear.cpp" />
+    <ClCompile Include="cMidBossClearUI.cpp" />
     <ClCompile Include="cMidBossEnterScene.cpp" />
     <ClCompile Include="cMidBossScene.cpp" />
     <ClCompile Include="cMotionBlur.cpp" />
@@ -462,6 +464,8 @@
     <ClInclude Include="cMainProc.h" />
     <ClInclude Include="cMeteor.h" />
     <ClInclude Include="cMidBoss.h" />
+    <ClInclude Include="cMidBossClear.h" />
+    <ClInclude Include="cMidBossClearUI.h" />
     <ClInclude Include="cMidBossEnterScene.h" />
     <ClInclude Include="cMidBossScene.h" />
     <ClInclude Include="cMotionBlur.h" />

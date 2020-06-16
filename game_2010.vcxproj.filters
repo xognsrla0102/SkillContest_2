@@ -216,6 +216,12 @@
     <Filter Include="0_core\object\_character\enemy\midBoss">
       <UniqueIdentifier>{b4d3bd8e-0c5e-46ed-a6db-ab0d3a39a99d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_core\scene\midbossclear">
+      <UniqueIdentifier>{a80ebab9-f791-4afe-9c4a-5e7a97dda6f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\manager\ui\midbossclear">
+      <UniqueIdentifier>{fb249be7-4eab-4bc4-8f6e-b56883aa34c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -442,6 +448,12 @@
     <ClCompile Include="cMidBoss.cpp">
       <Filter>0_core\object\_character\enemy\midBoss</Filter>
     </ClCompile>
+    <ClCompile Include="cMidBossClear.cpp">
+      <Filter>0_core\scene\midbossclear</Filter>
+    </ClCompile>
+    <ClCompile Include="cMidBossClearUI.cpp">
+      <Filter>0_core\manager\ui\midbossclear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -614,6 +626,12 @@
     </ClInclude>
     <ClInclude Include="cMidBoss.h">
       <Filter>0_core\object\_character\enemy\midBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="cMidBossClear.h">
+      <Filter>0_core\scene\midbossclear</Filter>
+    </ClInclude>
+    <ClInclude Include="cMidBossClearUI.h">
+      <Filter>0_core\manager\ui\midbossclear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

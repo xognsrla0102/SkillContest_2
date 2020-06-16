@@ -80,6 +80,7 @@ void cIntroScene::Intro()
 				Lerp(CAMERA->m_size, VEC2(1, 1), 3);
 				if (CAMERA->m_size.x < 1.01) {
 					GAME->Init();
+					((cPlayer*)OBJFIND(PLAYER))->Init();
 					SCENE->ChangeScene("IngameScene", "None", 0);
 				}
 			}

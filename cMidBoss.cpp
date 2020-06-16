@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "cMidBoss.h"
 
-cMidBoss::cMidBoss() : cEnemy(1000, 10)
+cMidBoss::cMidBoss() : cEnemy(10000, 10)
 {
 	m_t = new cTimer(0.1);
 	m_pos = GXY(GAMESIZE / 2, 200); 
@@ -27,6 +27,7 @@ void cMidBoss::Update()
 		m_time++;
 		if (m_isDead) {
 			if (m_time % 3 == 0) {
+				CAMERA->SetShake(0.05, 40);
 				SOUND->Copy("EnemyHitSND");
 				SOUND->Copy("EnemyHitSND");
 			}
@@ -117,6 +118,7 @@ void cMidBoss::Dead()
 		deadTime = 4;
 		m_isDead = false;
 		m_isLive = false;
+		SCENE->ChangeScene("MidBossClearScene", "BlackFade", 3);
 	}
 	else EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, VEC2(m_pos + RandomInsideSquare() * 300), VEC2(0, 0)));
 }

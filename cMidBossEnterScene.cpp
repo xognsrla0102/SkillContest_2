@@ -58,7 +58,7 @@ void cMidBossEnterScene::Update()
 
 	if (35 <= m_time && m_time <= 45) {
 		m_bAlpha = 0;
-		Lerp(CAMERA->m_size, VEC2(1.5, 1.5), 5);
+		Lerp(CAMERA->m_size, VEC2(1.2, 1.2), 5);
 	}
 	
 	if (35 <= m_time && m_time <= 50) {

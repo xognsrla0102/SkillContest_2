@@ -72,7 +72,7 @@ void cIngameUI::Render()
 			(LONG)(midBoss->m_hp / (double)midBoss->m_hpMax * m_bossHP->m_info.Width),
 			(LONG)m_bossHP->m_info.Height
 		};
-		IMAGE->CropRender(m_bossHP, GXY(0, 100), rt);
+		IMAGE->CropRender(m_bossHP, GXY(30, 30), rt);
 	}
 
 	rt = {
