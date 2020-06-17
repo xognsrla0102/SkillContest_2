@@ -25,6 +25,10 @@ void cEnemyManager::Update()
 		if (m_midBoss->GetLive()) m_midBoss->Update();
 		else SAFE_DELETE(m_midBoss);
 	}
+	if (m_boss) {
+		if (m_boss->GetLive()) m_boss->Update();
+		else SAFE_DELETE(m_boss);
+	}
 }
 
 void cEnemyManager::Render()
@@ -33,6 +37,8 @@ void cEnemyManager::Render()
 		iter->Render();
 	if (m_midBoss && m_midBoss->GetLive())
 		m_midBoss->Render();
+	if (m_boss && m_boss->GetLive())
+		m_boss->Render();
 }
 
 void cEnemyManager::Release()
@@ -41,4 +47,5 @@ void cEnemyManager::Release()
 		SAFE_DELETE(iter);
 	m_enemy.clear();
 	SAFE_DELETE(m_midBoss);
+	SAFE_DELETE(m_boss);
 }

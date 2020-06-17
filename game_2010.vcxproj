@@ -385,6 +385,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAnimation.cpp" />
+    <ClCompile Include="cBoss.cpp" />
+    <ClCompile Include="cBossEnterScene.cpp" />
+    <ClCompile Include="cBossScene.cpp" />
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletManager.cpp" />
     <ClCompile Include="cButton.cpp" />
@@ -423,8 +426,9 @@
     <ClCompile Include="cPath.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cPlayerBullet.cpp" />
+    <ClCompile Include="cRankScene.cpp" />
     <ClCompile Include="cRazer.cpp" />
-    <ClCompile Include="cRotate.cpp" />
+    <ClCompile Include="cResultScene.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cScroolMap.cpp" />
@@ -439,6 +443,9 @@
     <ClCompile Include="math.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClInclude Include="cAnimation.h" />
+    <ClInclude Include="cBoss.h" />
+    <ClInclude Include="cBossEnterScene.h" />
+    <ClInclude Include="cBossScene.h" />
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletManager.h" />
     <ClInclude Include="cButton.h" />
@@ -477,8 +484,9 @@
     <ClInclude Include="cPath.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cPlayerBullet.h" />
+    <ClInclude Include="cRankScene.h" />
     <ClInclude Include="cRazer.h" />
-    <ClInclude Include="cRotate.h" />
+    <ClInclude Include="cResultScene.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cScroolMap.h" />

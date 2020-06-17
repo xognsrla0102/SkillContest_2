@@ -35,8 +35,8 @@ void cPlayer::Init()
 	if (m_fire) m_fire->m_delay = m_fireDelay[m_radialTan];
 
 	//초기 무기 공격력
-	m_atk[0] = 30;
-	m_atk[1] = 20;
+	m_atk[0] = 10;
+	m_atk[1] = 15;
 
 	m_isDamaged = false;
 	m_isLive = true;
@@ -181,16 +181,16 @@ void cPlayer::Fire()
 		if (m_radialTan) {
 			switch (GAME->m_level) {
 			case 1:
-				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
+				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 2000.f, m_atk[m_radialTan]);
 				break;
 			case 2:
-				N_Way_Tan("PlayerBulletIMG", 5, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
+				N_Way_Tan("PlayerBulletIMG", 3, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 3:
-				N_Way_Tan("PlayerBulletIMG", 8, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
+				N_Way_Tan("PlayerBulletIMG", 5, 10, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 4:
-				N_Way_Tan("PlayerBulletIMG", 8, 7, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
+				N_Way_Tan("PlayerBulletIMG", 5, 7, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);
 				break;
 			case 5:
 				N_Way_Tan("PlayerBulletIMG", 8, 5, m_pos, VEC2(0, -1), VEC2(3, 3), 3000.f, m_atk[m_radialTan]);

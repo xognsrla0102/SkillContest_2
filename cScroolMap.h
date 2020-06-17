@@ -2,6 +2,7 @@
 class cScroolMap
 {
 private:
+	cTexture* text = nullptr;
 	cImage* m_img1, *m_img2;
 	cImage* m_gas;
 	cTimer* m_createGas;

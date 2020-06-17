@@ -1,13 +1,23 @@
 #include "DXUT.h"
 #include "cGameManager.h"
 
+bool Comp(cScore* a, cScore* b) {
+	return (a->m_score > b->m_score);
+}
+
 cGameManager::cGameManager()
 {
 	Init();
+	m_scoreList[0] = new cScore("KDJ", 2020);
+	m_scoreList[1] = new cScore("KTH", 2019);
+	m_scoreList[2] = new cScore("SDH", 2018);
+	m_scoreList[3] = new cScore;
 }
 
 cGameManager::~cGameManager()
 {
+	for (auto iter : m_scoreList)
+		SAFE_DELETE(iter);
 }
 
 void cGameManager::StageInit()
@@ -80,20 +90,25 @@ void cGameManager::Update()
 
 	//아이템 랜덤 생성 ------------------------------------------
 
-	//if (KEYDOWN(VK_F3)) {
-	//	static bool isHp = true;
-	//	if (isHp) {
-	//		((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
-	//			new cItem("ItemHpIMG", GXY(GAMESIZEX / 2, -100), GXY(GAMESIZEX / 2, -100))
-	//		);
-	//	}
-	//	else {
-	//		((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
-	//			new cItem("ItemSkillTimeIMG", GXY(GAMESIZEX / 2, -100), GXY(GAMESIZEX / 2, -100))
-	//		);
-	//	}
-	//	isHp = !isHp;
-	//}
+	if (KEYDOWN(VK_F3)) {
+		switch (rand() % 3) {
+		case 0:
+			((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
+				new cItem("ItemHpIMG", GXY(GAMESIZE / 2, -100), GXY(GAMESIZE / 2, -100))
+			);
+			break;
+		case 1:
+			((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
+				new cItem("ItemSkillTimeIMG", GXY(GAMESIZE / 2, -100), GXY(GAMESIZE / 2, -100))
+			);
+			break;
+		case 2:
+			((cItemManager*)OBJFIND(ITEM))->m_items.push_back(
+				new cItem("ItemLevelUpIMG", GXY(GAMESIZE / 2, -100), GXY(GAMESIZE / 2, -100))
+			);
+			break;
+		}
+	}
 
 	//디버깅 정보 ------------------------------------------
 	if (KEYDOWN(VK_F7)) m_isDebugInfo = !m_isDebugInfo;
@@ -101,4 +116,5 @@ void cGameManager::Update()
 
 void cGameManager::SortScore()
 {
+	sort(m_scoreList, m_scoreList + 4, Comp);
 }

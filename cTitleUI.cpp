@@ -52,7 +52,7 @@ void cTitleUI::Update()
 			SCENE->ChangeScene("HowtoScene", "BlackFade", 3);
 			break;
 		case 2:
-			SCENE->ChangeScene("RankScene", "BlackFade", 10);
+			SCENE->ChangeScene("RankScene", "BlackFade", 5);
 			break;
 		case 3:
 			PostQuitMessage(0);

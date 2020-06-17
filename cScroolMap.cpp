@@ -8,7 +8,7 @@ cScroolMap::cScroolMap(cTexture* text)
 	m_gas = new cImage;
 	m_createGas = new cTimer(0);
 
-	m_img1->m_text = m_img2->m_text = text;
+	this->text = text;
 	Init();
 }
 
@@ -24,9 +24,7 @@ cScroolMap::~cScroolMap()
 
 void cScroolMap::Init()
 {
-	char str[256];
-	sprintf(str, "Stage%dBG", GAME->m_nowStage);
-	m_img1->m_text = m_img2->m_text = IMAGE->FindTexture(str);
+	m_img1->m_text = m_img2->m_text = text;
 
 	m_gas->m_text = IMAGE->FindTexture("IngameSmokeIMG", rand() % 4);
 	m_gas->m_pos = GXY(-500, -(double)m_gas->m_text->m_info.Height - 1000);
@@ -47,7 +45,7 @@ void cScroolMap::Init()
 void cScroolMap::Update()
 {
 	if (m_createGas->Update()) {
-		m_createGas->m_delay = 2.f + rand() % 3;
+		m_createGas->m_delay = 3.f + rand() % 2;
 		m_gas->m_text = IMAGE->FindTexture("IngameSmokeIMG", rand() % 4);
 		m_gas->m_pos = GXY(-500, -(double)m_gas->m_text->m_info.Height - 1000);
 	}

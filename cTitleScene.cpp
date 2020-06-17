@@ -85,4 +85,5 @@ void cTitleScene::Release()
 {
 	SOUND->Stop("TitleSND");
 	SOUND->Stop("TitleWarningSND");
+	CAMERA->ResetCamera();
 }

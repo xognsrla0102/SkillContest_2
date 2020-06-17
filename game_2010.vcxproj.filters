@@ -195,9 +195,6 @@
     <Filter Include="0_core\object\_character\enemy\turret">
       <UniqueIdentifier>{a582759f-9ee0-4e1a-b572-0da91a91f1b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="0_core\object\_character\enemy\rotate">
-      <UniqueIdentifier>{e3caad06-8852-453f-b155-ff5f00eba152}</UniqueIdentifier>
-    </Filter>
     <Filter Include="0_core\object\path">
       <UniqueIdentifier>{f91d0118-6c1e-4ae5-9080-55ecda25218b}</UniqueIdentifier>
     </Filter>
@@ -221,6 +218,21 @@
     </Filter>
     <Filter Include="0_core\manager\ui\midbossclear">
       <UniqueIdentifier>{fb249be7-4eab-4bc4-8f6e-b56883aa34c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\bossenter">
+      <UniqueIdentifier>{f5262fb7-f11e-494b-9c37-aa9cfde6a724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\boss">
+      <UniqueIdentifier>{98acf5bc-8199-40d8-b9d7-ebc3fdeaba28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\rank">
+      <UniqueIdentifier>{ac6dc12c-a35d-4f54-988a-b8e8bbc524d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\scene\result">
+      <UniqueIdentifier>{fff6650d-387f-46df-b7fb-ba1f55a7bce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_core\object\_character\enemy\boss">
+      <UniqueIdentifier>{29f91c83-40f3-4386-8e1a-57bc4db884d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -427,9 +439,6 @@
     <ClCompile Include="cEnemyBullet.cpp">
       <Filter>0_core\object\bullet\enemyBullet</Filter>
     </ClCompile>
-    <ClCompile Include="cRotate.cpp">
-      <Filter>0_core\object\_character\enemy\rotate</Filter>
-    </ClCompile>
     <ClCompile Include="cPath.cpp">
       <Filter>0_core\object\path</Filter>
     </ClCompile>
@@ -453,6 +462,21 @@
     </ClCompile>
     <ClCompile Include="cMidBossClearUI.cpp">
       <Filter>0_core\manager\ui\midbossclear</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossEnterScene.cpp">
+      <Filter>0_core\scene\bossenter</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossScene.cpp">
+      <Filter>0_core\scene\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cRankScene.cpp">
+      <Filter>0_core\scene\rank</Filter>
+    </ClCompile>
+    <ClCompile Include="cResultScene.cpp">
+      <Filter>0_core\scene\result</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoss.cpp">
+      <Filter>0_core\object\_character\enemy\boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -606,9 +630,6 @@
     <ClInclude Include="cEnemyBullet.h">
       <Filter>0_core\object\bullet\enemyBullet</Filter>
     </ClInclude>
-    <ClInclude Include="cRotate.h">
-      <Filter>0_core\object\_character\enemy\rotate</Filter>
-    </ClInclude>
     <ClInclude Include="cPath.h">
       <Filter>0_core\object\path</Filter>
     </ClInclude>
@@ -632,6 +653,21 @@
     </ClInclude>
     <ClInclude Include="cMidBossClearUI.h">
       <Filter>0_core\manager\ui\midbossclear</Filter>
+    </ClInclude>
+    <ClInclude Include="cBossEnterScene.h">
+      <Filter>0_core\scene\bossenter</Filter>
+    </ClInclude>
+    <ClInclude Include="cBossScene.h">
+      <Filter>0_core\scene\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cRankScene.h">
+      <Filter>0_core\scene\rank</Filter>
+    </ClInclude>
+    <ClInclude Include="cResultScene.h">
+      <Filter>0_core\scene\result</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoss.h">
+      <Filter>0_core\object\_character\enemy\boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

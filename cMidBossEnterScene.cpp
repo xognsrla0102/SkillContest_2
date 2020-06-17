@@ -24,6 +24,8 @@ cMidBossEnterScene::~cMidBossEnterScene()
 
 void cMidBossEnterScene::Init()
 {
+	SOUND->Play("TitleSND", true);
+
 	char str[256];
 	sprintf(str, "Stage%dBG", GAME->m_nowStage);
 	m_map = new cScroolMap(IMAGE->FindTexture(str));
@@ -99,6 +101,8 @@ void cMidBossEnterScene::Render()
 
 void cMidBossEnterScene::Release()
 {
+	SOUND->Stop("TitleSND");
+
 	SAFE_DELETE(m_map);
 	CAMERA->m_size = VEC2(1, 1);
 }

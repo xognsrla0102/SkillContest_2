@@ -27,7 +27,8 @@ void cMidBossClearUI::Update()
 
 		if (m_t->Update()) {
 			time++;
-			if (time % 5 == 0) enterHit--;
+			if(time % 2 == 0)
+				enterHit--;
 		}
 
 		if (KEYDOWN(VK_RETURN)) {

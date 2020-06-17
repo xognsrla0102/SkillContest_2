@@ -65,11 +65,20 @@ void cIngameUI::Render()
 	IMAGE->DrawFont("잔여 체력 : " + str2, VEC2(150, 380), "HY견고딕", 25);
 
 	auto midBoss = ((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss;
+	auto boss = ((cEnemyManager*)OBJFIND(ENEMY))->m_boss;
 
 	if (midBoss) {
 		rt = {
 			0, 0,
 			(LONG)(midBoss->m_hp / (double)midBoss->m_hpMax * m_bossHP->m_info.Width),
+			(LONG)m_bossHP->m_info.Height
+		};
+		IMAGE->CropRender(m_bossHP, GXY(30, 30), rt);
+	}
+	if (boss) {
+		rt = {
+			0, 0,
+			(LONG)(boss->m_hp / (double)boss->m_hpMax * m_bossHP->m_info.Width),
 			(LONG)m_bossHP->m_info.Height
 		};
 		IMAGE->CropRender(m_bossHP, GXY(30, 30), rt);
@@ -88,6 +97,13 @@ void cIngameUI::Render()
 	IMAGE->CropRender(m_exp, VEC2(16, 778), rt);
 	IMAGE->DrawFont("현재 경험치 : " + str2, VEC2(200, 720), "HY견고딕", 20);
 	IMAGE->DrawFont(to_string(GAME->m_level), VEC2(110, 830), "HY견고딕", 20);
+
+	if (GAME->m_isDebugInfo) {
+		IMAGE->DrawFont("플레이어 레벨 : " + to_string(GAME->m_level), VEC2(1150, 40), "HY견고딕", 25);
+		IMAGE->DrawFont("누적 경험치  : " + to_string(GAME->m_score), VEC2(1150, 80), "HY견고딕", 25);
+		for (int i = 2; i <= 4; ++i)
+			IMAGE->DrawFont(to_string(i) + "레벨 필요한 경험치 : " + to_string(4000 + 1500 * (i - 2)), VEC2(1150, 100 + 40 * (i - 1)), "HY견고딕", 25);
+	}
 }
 
 void cIngameUI::Release()

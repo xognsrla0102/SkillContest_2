@@ -8,6 +8,7 @@ private:
 	vector<cEnemy*> m_enemy;
 public:
 	cMidBoss* m_midBoss = nullptr;
+	cBoss* m_boss = nullptr;
 public:
 	cEnemyManager();
 	virtual ~cEnemyManager();

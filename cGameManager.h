@@ -1,10 +1,20 @@
 #pragma once
 #include "cSingleton.hpp";
 
+class cScore {
+public:
+	string m_initial;
+	int m_score = 0;
+public:
+	cScore() {}
+	cScore(string initial, int score) : m_initial(initial), m_score(score) {}
+};
 
 class cGameManager : public cSingleton<cGameManager>
 {
 public:
+	cScore* m_scoreList[4];
+
 	double OLD_TIME_SCALE;
 	double TIME_SCALE;
 

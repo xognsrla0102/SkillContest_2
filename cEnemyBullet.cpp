@@ -28,7 +28,7 @@ cEnemyBullet::~cEnemyBullet()
 void cEnemyBullet::Update()
 {
 	if (m_isFaccel) {
-		if (m_accel > 4.f) m_accel = 4.f;
+		if (m_accel > 10.f) m_accel = 10.f;
 		else m_accel += D_TIME * 10;
 	}
 	else if (m_isSaccel) {

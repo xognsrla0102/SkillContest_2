@@ -4,7 +4,6 @@
 cIngameScene::cIngameScene()
 {
 	m_t = new cTimer(0.1);
-	m_map = new cScroolMap(IMAGE->FindTexture("Stage1BG"));
 }
 
 cIngameScene::~cIngameScene()
@@ -15,23 +14,45 @@ cIngameScene::~cIngameScene()
 
 void cIngameScene::Init()
 {
-	SOUND->Play("TitleSND", true);
+	SOUND->Play("StageSND", true);
 	OBJFIND(PLAYER)->SetActive(true);
 	OBJFIND(PLAYER)->SetPos(GXY(GAMESIZE / 2, GAMESIZE / 2));
+
+	char str[256];
+	sprintf(str, "Stage%dBG", GAME->m_nowStage);
+	m_map = new cScroolMap(IMAGE->FindTexture(str));
+
 	m_map->Init();
 	m_time = 0;
-	GAME->m_isBehind = false;
+
+	//중간보스 이전
+	if (GAME->m_isBehind) ((cPlayer*)OBJFIND(PLAYER))->Init();
+	else ((cPlayer*)OBJFIND(PLAYER))->m_hp = ((cPlayer*)OBJFIND(PLAYER))->m_hpMax;
 }
 
 void cIngameScene::Update()
 {
-	if (KEYDOWN('P')) m_time = 300;
+	if (KEYDOWN('O')) GAME->m_isBehind = !GAME->m_isBehind;
+
+	if (KEYDOWN('P')) {
+		if (GAME->m_isBehind) m_time = 300;
+		else m_time = 390;
+	}
 
 	if (m_t->Update()) {
 		m_time++;
 		LevelDesign();
 	}
 
+	if (!GAME->m_isBehind) {
+		if (m_time >= 350) {
+			((cPlayer*)OBJFIND(PLAYER))->m_canMove = false;
+			Lerp(OBJFIND(PLAYER)->GetRefPos(), GXY(GAMESIZE / 2, GAMESIZE / 2), 5);
+			if (DistPoint(OBJFIND(PLAYER)->GetPos(), GXY(GAMESIZE / 2, GAMESIZE / 2)) < 0.2) {
+				SCENE->ChangeScene("BossEnterScene", "BlackFade", 1.5);
+			}
+		}
+	}
 	m_map->Update();
 }
 
@@ -42,10 +63,14 @@ void cIngameScene::Render()
 
 void cIngameScene::Release()
 {
-	SOUND->Stop("TitleSND");
+	SAFE_DELETE(m_map);
+
+	SOUND->Stop("StageSND");
 	OBJFIND(PLAYER)->SetActive(false);
+	((cPlayer*)OBJFIND(PLAYER))->m_canMove = true;
 	((cBulletManager*)OBJFIND(BULLET))->Reset();
 	((cEnemyManager*)OBJFIND(ENEMY))->Release();
+	EFFECT->Reset();
 }
 
 void cIngameScene::LevelDesign()
@@ -187,20 +212,127 @@ void cIngameScene::LevelDesign()
 		if (m_time == 320) SCENE->ChangeScene("MidBossEnterScene", "BlackFade", 3);
 	}
 	else {
-		if (m_time % 2 == 0) {
+		if (m_time % 2 == 0 && m_time < 400) {
 			CreateMeteor(0, 0, 500);
 			CreateMeteor(10, 10, 500);
 		}
 
-		if (m_time == 32) CreateMeteor(3, 7, 500);
-		if (m_time == 34) CreateMeteor(3, 7, 500);
-		if (m_time == 36) CreateMeteor(5, 9, 500);
-		if (m_time == 38) CreateMeteor(5, 9, 500);
-		if (m_time == 40) CreateMeteor(3, 7, 500);
-		if (m_time == 42) CreateMeteor(3, 7, 500);
+		if (m_time == 5) {
+			CreateRazer(1, 1);
+			CreateRazer(5, 5);
+			CreateRazer(7, 7);
+		}
 
-		if(46 <= m_time && m_time <= 60)
-			CreateMeteor(3, 7, 500);
+		if (m_time == 22) CreateMeteor(3, 7, 500);
+		if (m_time == 24) CreateMeteor(5, 9, 500);
+		if (m_time == 26) CreateMeteor(3, 7, 500);
+		if (m_time == 28) CreateMeteor(5, 9, 500);
+		if (m_time == 32) CreateMeteor(1, 2, 500);
+		if (m_time == 34) CreateMeteor(4, 2, 500);
+
+		for (int i = 0; i < 4; ++i) {
+			if (m_time == 40 + 20 * i) {
+				CreateMeteor(1, 1, 500);
+				CreateMeteor(4, 4, 500);
+			}
+			if (m_time == 42 + 20 * i) {
+				CreateMeteor(1, 1, 500);
+				CreateMeteor(4, 4, 500);
+			}
+			if (m_time == 44 + 20 * i) {
+				CreateMeteor(1, 1, 500);
+				CreateMeteor(4, 4, 500);
+				CreateTurret(2, 2, 500);
+				CreateTurret(3, 3, 500);
+			}
+			if (m_time == 46 + 20 * i)
+				CreateMeteor(2, 3, 500);
+
+
+			if (m_time == 50 + 20 * i) {
+				CreateMeteor(6, 6, 500);
+				CreateMeteor(9, 9, 500);
+			}
+			if (m_time == 52 + 20 * i) {
+				CreateMeteor(6, 6, 500);
+				CreateMeteor(9, 9, 500);
+			}
+			if (m_time == 54 + 20 * i) {
+				CreateMeteor(6, 6, 500);
+				CreateMeteor(9, 9, 500);
+				CreateTurret(7, 7, 500);
+				CreateTurret(8, 8, 500);
+			}
+			if (m_time == 56 + 20 * i)
+				CreateMeteor(7, 8, 500);
+		}
+
+		if (m_time == 120)
+			CreateTurret(1, 9, 500);
+
+		for (int i = 0; i < 2; ++i) {
+			if (m_time == 130 + 20 * i) {
+				CreateTurret(1, 1, 500);
+				CreateTurret(4, 4, 500);
+			}
+			if (m_time == 132 + 20 * i) {
+				CreateTurret(1, 1, 500);
+				CreateTurret(4, 4, 500);
+			}
+			if (m_time == 134 + 20 * i) {
+				CreateMeteor(2, 2, 500);
+				CreateMeteor(3, 3, 500);
+				CreateTurret(1, 1, 500);
+				CreateTurret(4, 4, 500);
+			}
+			if (m_time == 136 + 20 * i)
+				CreateTurret(2, 3, 500);
+
+
+			if (m_time == 140 + 20 * i) {
+				CreateTurret(6, 6, 500);
+				CreateTurret(9, 9, 500);
+			}
+			if (m_time == 142 + 20 * i) {
+				CreateTurret(6, 6, 500);
+				CreateTurret(9, 9, 500);
+			}
+			if (m_time == 144 + 20 * i) {
+				CreateTurret(6, 6, 500);
+				CreateTurret(9, 9, 500);
+				CreateMeteor(7, 7, 500);
+				CreateMeteor(8, 8, 500);
+			}
+			if (m_time == 146 + 20 * i)
+				CreateTurret(7, 8, 500);
+		}
+
+		for (int i = 1; i < 9; ++i) {
+			if (m_time == 170 + i * 5)
+				CreateRazer(i, i);
+		}
+
+		if (m_time == 230) {
+			CreateRazer(1, 4);
+			CreateRazer(6, 9);
+		}
+
+		if (m_time == 280) {
+			CreateRazer(3, 7);
+			CreateRazer(1, 1);
+		}
+
+		if (m_time == 290) 
+			CreateRazer(1, 9);
+
+		if (m_time == 300)
+			CreateRazer(1, 9);
+
+		if (m_time == 305)
+			CreateRazer(1, 9);
+
+		if (m_time == 305)
+			CreateRazer(1, 9);
 	}
 }
 
@@ -230,10 +362,13 @@ void cIngameScene::CreateCircle(int startGrid, int endGrid, int speed)
 {
 	VEC2 startPos = GXY(105 * startGrid, -100);
 	int num = endGrid - startGrid + 1;
-	for (int i = 0; i < num; ++i)
-		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
+	auto& enemy = ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy();
+	for (int i = 0; i < num; ++i) {
+		enemy.push_back(
 			new cCircle(VEC2(startPos.x + i * 105, startPos.y), speed)
 		);
+		enemy[enemy.size() - 1]->m_itemName.push_back("ItemHpIMG");
+	}
 }
 
 void cIngameScene::CreateRazer(int startGrid, int endGrid)

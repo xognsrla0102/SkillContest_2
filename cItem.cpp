@@ -19,13 +19,13 @@ void cItem::Update()
 
 	if (m_isEndPos == FALSE) {
 		if (DistPoint(m_pos, m_endPos) < 5.f) m_isEndPos = TRUE;
-		else Lerp(m_pos, m_endPos);
+		else Lerp(m_pos, m_endPos, 2);
 	}
 	else {
 		//0.5초만에 원래 속도 도달
 		if (m_accel < 1.f) m_accel += D_TIME * 2;
 		else m_accel = 1.f;
-		m_pos.y += 200.f * D_TIME * m_accel;
+		m_pos.y += 500.f * D_TIME * m_accel;
 	}
 
 }
@@ -46,6 +46,9 @@ void cItem::OnCollision(cObject* other)
 
 	if (AABB(itemRect, playerRect)) {
 		SOUND->Copy("GetItemSND");
+		SOUND->Copy("GetItemSND");
+		SOUND->Copy("GetItemSND");
+
 		if (m_key == "ItemHpIMG") {
 			player->m_hp += player->m_hpMax / 5.0;
 			if (player->m_hp > player->m_hpMax) {

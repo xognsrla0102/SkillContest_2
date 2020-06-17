@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "cMidBoss.h"
 
-cMidBoss::cMidBoss() : cEnemy(10000, 10)
+cMidBoss::cMidBoss() : cEnemy(5000 + 5000 * (GAME->m_level - 1), 10)
 {
 	m_t = new cTimer(0.1);
 	m_pos = GXY(GAMESIZE / 2, 200); 
@@ -27,7 +27,7 @@ void cMidBoss::Update()
 		m_time++;
 		if (m_isDead) {
 			if (m_time % 3 == 0) {
-				CAMERA->SetShake(0.05, 40);
+				CAMERA->SetShake(0.05, 70);
 				SOUND->Copy("EnemyHitSND");
 				SOUND->Copy("EnemyHitSND");
 			}
@@ -56,7 +56,7 @@ void cMidBoss::Move()
 	//보간하면서 꼬라보게
 	Lerp(m_rot, D3DXToDegree(atan2(dir.y, dir.x)) - 90.0, 2);
 
-	if (m_time <= 200) {
+	if (m_hp > m_hpMax / 2) {
 		if (m_isMoveDone) {
 			m_nextPos = GXY(rand() % GAMESIZE, rand() % 30 * 10);
 			m_isMoveDone = false;
@@ -74,7 +74,7 @@ void cMidBoss::Fire()
 {
 	if (m_time <= 20) return;
 
-	if (m_time <= 200) {
+	if (m_hp > m_hpMax / 2) {
 		static double rot = 0;
 		static int dRot = 10;
 		VEC2 dir;
@@ -100,13 +100,13 @@ void cMidBoss::Fire()
 			D3DXVec2Normalize(&dir, &dir);
 			char str[256];
 			sprintf(str, "EnemyBullet%dIMG", rand() % 4);
-			N_Way_Tan(str, 36, 10, m_pos, dir, VEC2(1, 1), 600, m_atk);
+			N_Way_Tan(str, 36, 10, m_pos, dir, VEC2(4, 4), 400, m_atk);
 		}
 	}
 	else {
 		char str[256];
 		sprintf(str, "EnemyBullet%dIMG", rand() % 4);
-		N_Way_Tan(str, 10, 36, m_pos, VEC2(0, 1), VEC2(3, 3), 200, m_atk, true, false, false, true);
+		N_Way_Tan(str, 10, 36, m_pos, VEC2(0, 1), VEC2(3, 3), 150, m_atk, true, false, true);
 	}
 }
 

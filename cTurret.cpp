@@ -4,7 +4,9 @@
 cTurret::cTurret(VEC2 pos, double downSpd)
 	: cEnemy(20 + 20 * GAME->m_level, 5 * GAME->m_nowStage), m_downSpd(downSpd)
 {
-	m_img = IMAGE->FindTexture("EnemyTurretIMG");
+	char str[256];
+	sprintf(str, "EnemyTurret%dIMG", GAME->m_nowStage - 1);
+	m_img = IMAGE->FindTexture(str);
 
 	m_objName = "EnemyTurret";
 	m_pos = pos;

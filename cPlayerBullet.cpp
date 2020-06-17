@@ -18,7 +18,11 @@ void cPlayerBullet::Update()
 		if (iter->GetLive())
 			OnCollision(iter);
 
-	auto boss = ((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss;
+	auto midBoss = ((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss;
+	auto boss = ((cEnemyManager*)OBJFIND(ENEMY))->m_boss;
+
+	if (midBoss && midBoss->GetLive())
+		OnCollision(midBoss);
 	if (boss && boss->GetLive())
 		OnCollision(boss);
 
@@ -33,7 +37,7 @@ void cPlayerBullet::OnCollision(cObject* other)
 		SetLive(false);
 		SOUND->Copy("EnemyHitSND");
 		VEC2 pos = other->GetPos();
-		EFFECT->AddEffect(new cEffect("DieEFFECT", 1, 0, pos, VEC2(0, 0), VEC2(1, 1), VEC2(1, 1), 1000));
+		EFFECT->AddEffect(new cEffect("DieEFFECT", 1, 0, VEC2(pos + RandomInsideSquare() * 100), VEC2(0, 0), VEC2(1, 1), VEC2(1, 1), 1000));
 		((cEnemy*)other)->m_hp -= m_atk;
 		if (((cEnemy*)other)->m_hp <= 0) {
 			if (other->GetName() == "EnemyMidBoss") {
@@ -43,10 +47,10 @@ void cPlayerBullet::OnCollision(cObject* other)
 			}
 			else if (other->GetName() == "EnemyBoss") {
 				((cEnemy*)other)->m_hp = 0;
-				//((cBoss*)other)->m_isDead = true;
+				((cBoss*)other)->m_isDead = true;
 				return;
 			}
-			EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, pos, VEC2(0, 0)));
+			EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, pos, VEC2(0, 0), VEC2(0, 0), VEC2(2, 2)));
 			((cEnemy*)other)->SetLive(false);
 			CAMERA->SetShake(0.1, 10);
 			SOUND->Copy("EnemyDeadSND");
@@ -56,7 +60,8 @@ void cPlayerBullet::OnCollision(cObject* other)
 					new cItem(nowItemName, pos, VEC2(pos.x, pos.y - (40 + rand() % 30)))
 				);
 			}
-			GAME->m_nowExp += 50 + rand() % 3 * 30;
+			if(GAME->m_level != 5) GAME->m_nowExp += 300 + rand() % 5 * 50;
+			GAME->m_score += (rand() % 10 + 5) * 543;
 		}
 	}
 }

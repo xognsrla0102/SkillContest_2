@@ -7,14 +7,14 @@ cMidBossClear::cMidBossClear()
 	m_player = new cImage;
 	m_white = IMAGE->FindTexture("WhiteIMG");
 	m_player->m_text = IMAGE->FindTexture("IngamePlayerIMG");
-	m_razer = IMAGE->FindTexture("EnemyRazer0IMG");
+	m_razer = IMAGE->FindTexture("EnemyBulletRazer1IMG");
 	m_shield = IMAGE->FindTexture("ShieldIMG");
 }
 
 cMidBossClear::~cMidBossClear()
 {
-	SAFE_DELETE(m_player);
 	SAFE_DELETE(m_ani);
+	SAFE_DELETE(m_player);
 }
 
 void cMidBossClear::Init()
@@ -44,7 +44,7 @@ void cMidBossClear::Update()
 			if (whiteAlpha < 10) {
 				GAME->m_isBehind = false;
 				GAME->m_story = 2;
-				SCENE->ChangeScene("IngameScene", "BlackFade", 2);
+				SCENE->ChangeScene("ResultScene", "BlackFade", 3);
 			}
 		}
 	}

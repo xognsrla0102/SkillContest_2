@@ -16,8 +16,8 @@ cRazer::cRazer(VEC2 pos, bool isBehind)
 		m_path->AddPoint(VEC2(m_pos.x, GAMESIZE + 100), 0, 2);
 	}
 	else {
-		m_path->AddPoint(VEC2(m_pos.x, 250), 5, 0);
-		m_path->AddPoint(VEC2(m_pos.x, 250), 0, 2);
+		m_path->AddPoint(VEC2(m_pos.x, 200), 5, 0);
+		m_path->AddPoint(VEC2(m_pos.x, 200), 0, 2);
 	}
 
 	if (pos.x < GX(GAMESIZE / 2))
@@ -25,7 +25,9 @@ cRazer::cRazer(VEC2 pos, bool isBehind)
 	else
 		m_path->AddPoint(GXY(GAMESIZE + 250, pos.y), 3, 0);
 
-	m_img = IMAGE->FindTexture("EnemyRazerIMG");
+	char str[256];
+	sprintf(str, "EnemyRazer%dIMG", GAME->m_nowStage - 1);
+	m_img = IMAGE->FindTexture(str);
 	m_objName = "EnemyRazer";
 }
 
@@ -119,7 +121,7 @@ void cRazer::Fire()
 		if (m_isBehind) dir = VEC2(0, -1);
 		else dir = VEC2(0, 1);
 		char str[256];
-		sprintf(str, "EnemyRazer%dIMG", GAME->m_nowStage - 1);
+		sprintf(str, "EnemyBulletRazer%dIMG", GAME->m_nowStage - 1);
 		N_Straight_Tan(str, 1, 0, VEC2(m_pos.x, m_pos.y + 600), dir, VEC2(5, 20), 3000, m_atk);
 	}
 }

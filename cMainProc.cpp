@@ -5,6 +5,9 @@ cMainProc::cMainProc()
 {
 	srand(time(0));
 
+	IMAGE->AddTexture("RankBG", "resources/image/rank/bg.png");
+	IMAGE->AddTexture("ResultBG", "resources/image/result/bg.png");
+
 	IMAGE->AddTexture("TitleBG", "resources/image/title/bg.png");
 	IMAGE->AddTexture("TitleNameIMG", "resources/image/title/gamename.png");
 
@@ -48,27 +51,33 @@ cMainProc::cMainProc()
 	IMAGE->AddTexture("ChargeRazerIMG", "resources/image/effect/chargeRazerEffect/%d.png", 24);
 
 	IMAGE->AddTexture("EnemyMeteorIMG", "resources/image/enemy/meteor.png");
-	IMAGE->AddTexture("EnemyTurretIMG", "resources/image/enemy/turret.png");
-	IMAGE->AddTexture("EnemyRazerIMG", "resources/image/enemy/razer.png");
+	IMAGE->AddTexture("EnemyTurret0IMG", "resources/image/enemy/0_turret.png");
+	IMAGE->AddTexture("EnemyTurret1IMG", "resources/image/enemy/1_turret.png");
+	IMAGE->AddTexture("EnemyRazer0IMG", "resources/image/enemy/0_razer.png");
+	IMAGE->AddTexture("EnemyRazer1IMG", "resources/image/enemy/1_razer.png");
 
 	IMAGE->AddTexture("PlanetIMG", "resources/image/enemy/planet.png");
 
 	IMAGE->AddTexture("EnemyCircle0IMG", "resources/image/enemy/0_circle.png");
 	IMAGE->AddTexture("EnemyCircle1IMG", "resources/image/enemy/1_circle.png");
-	IMAGE->AddTexture("EnemySin0IMG", "resources/image/enemy/0_sin.png");
-	IMAGE->AddTexture("EnemySin1IMG", "resources/image/enemy/1_sin.png");
-	IMAGE->AddTexture("EnemyStraight0IMG", "resources/image/enemy/0_straight.png");
-	IMAGE->AddTexture("EnemyStraight1IMG", "resources/image/enemy/1_straight.png");
 
 	IMAGE->AddTexture("EnemyMidBoss0IMG", "resources/image/enemy/0_midboss.png");
 	IMAGE->AddTexture("EnemyMidBoss1IMG", "resources/image/enemy/1_midboss.png");
+	IMAGE->AddTexture("EnemyBoss0IMG", "resources/image/enemy/0_boss.png");
+	IMAGE->AddTexture("EnemyBoss1IMG", "resources/image/enemy/1_boss.png");
 
 	IMAGE->AddTexture("EnemyBullet0IMG", "resources/image/bullet/enemybullet0.png");
 	IMAGE->AddTexture("EnemyBullet1IMG", "resources/image/bullet/enemybullet1.png");
 	IMAGE->AddTexture("EnemyBullet2IMG", "resources/image/bullet/enemybullet2.png");
 	IMAGE->AddTexture("EnemyBullet3IMG", "resources/image/bullet/enemybullet3.png");
-	IMAGE->AddTexture("EnemyRazer0IMG", "resources/image/bullet/enemyrazer0.png");
-	IMAGE->AddTexture("EnemyRazer1IMG", "resources/image/bullet/enemyrazer1.png");
+	IMAGE->AddTexture("EnemyBulletRazer0IMG", "resources/image/bullet/enemyrazer0.png");
+	IMAGE->AddTexture("EnemyBulletRazer1IMG", "resources/image/bullet/enemyrazer1.png");
+
+	IMAGE->AddTexture("ItemHpIMG", "resources/image/item/hp.png");
+	IMAGE->AddTexture("ItemLevelUpIMG", "resources/image/item/levelup.png");
+	IMAGE->AddTexture("ItemSkillTimeIMG", "resources/image/item/skilltime.png");
+
+	IMAGE->AddTexture("BossEnterIMG", "resources/image/ingame/bossenter.png");
 
 	IMAGE->AddTexture("ShieldIMG", "resources/image/ui/ingame/shield.png");
 
@@ -82,10 +91,16 @@ cMainProc::cMainProc()
 	SOUND->AddSound("EnemyHitSND", L"resources/sound/enemyhit.wav");
 	SOUND->AddSound("EnemyDeadSND", L"resources/sound/enemydead.wav");
 	SOUND->AddSound("StageSND", L"resources/sound/stage.wav");
+	SOUND->AddSound("MidBossSND", L"resources/sound/midboss.wav");
+	SOUND->AddSound("BossSND", L"resources/sound/boss.wav");
+	SOUND->AddSound("RankSND", L"resources/sound/rank.wav");
+	SOUND->AddSound("ResultSND", L"resources/sound/result.wav");
 	SOUND->AddSound("PlayerBulletSND", L"resources/sound/playerbullet.wav");
 	SOUND->AddSound("PlayerDamageSND", L"resources/sound/playerdamage.wav");
 	SOUND->AddSound("RazerChargeSND", L"resources/sound/razer_charge.wav");
 	SOUND->AddSound("RazerFireSND", L"resources/sound/razer_fire.wav");
+	SOUND->AddSound("GetItemSND", L"resources/sound/getitem.wav");
+	SOUND->AddSound("NoSkillSND", L"resources/sound/noskill.wav");
 	//SCENE 매니저 생성자 호출
 	SCENE;
 
@@ -101,6 +116,10 @@ cMainProc::cMainProc()
 	SCENE->AddScene("MidBossEnterScene", new cMidBossEnterScene);
 	SCENE->AddScene("MidBossScene", new cMidBossScene);
 	SCENE->AddScene("MidBossClearScene", new cMidBossClear);
+	SCENE->AddScene("BossEnterScene", new cBossEnterScene);
+	SCENE->AddScene("BossScene", new cBossScene);
+	SCENE->AddScene("RankScene", new cRankScene);
+	SCENE->AddScene("ResultScene", new cResultScene);
 
 	SCENE->ChangeScene("TitleScene", "None", 0);
 }

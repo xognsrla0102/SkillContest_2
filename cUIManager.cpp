@@ -33,7 +33,7 @@ void cUIManager::Update()
 		find = m_UIs.find("TitleSceneUI");
 		isChangeUI = true;
 	}
-	else if (sceneName == "IngameScene" || sceneName == "MidBossScene") {
+	else if (sceneName == "IngameScene" || sceneName == "MidBossScene" || sceneName == "BossScene") {
 		find = m_UIs.find("IngameSceneUI");
 		isChangeUI = true;
 	}
