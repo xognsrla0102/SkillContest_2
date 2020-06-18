@@ -77,5 +77,6 @@ void cMidBossClear::Render()
 
 void cMidBossClear::Release()
 {
+	EFFECT->Reset();
 }
 

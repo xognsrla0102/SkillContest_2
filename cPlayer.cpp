@@ -23,8 +23,8 @@ void cPlayer::Init()
 	m_aTime = 10;
 	m_bTime = 20;
 
-	m_isAon = false;
-	m_isAon = false;
+	m_isAon = true;
+	m_isAon = true;
 	m_isAdown = false;
 	m_isReflect = false;
 
@@ -66,7 +66,7 @@ void cPlayer::Release()
 void cPlayer::Update()
 {
 	if (!m_isLive) { Dead(); return; }
-	else if (!m_isActive || !m_isLive || SCENE->m_isSceneChange) return;
+	else if (!m_isActive || SCENE->m_isSceneChange) return;
 
 	Move();
 	ChangeWeapon();
@@ -93,10 +93,9 @@ void cPlayer::Update()
 
 void cPlayer::Render()
 {
-	NoOutMap();
 	if (!m_isActive) return;
 	IMAGE->Render(m_img, m_pos, m_size, m_rot, true, D3DCOLOR_ARGB((int)m_a, 255, 255, 255));
-	if (GAME->m_level > 2 && !m_isAon && m_aTime >= 7) IMAGE->Render(m_shield, m_pos, VEC2(1.f, 1.f), 0, true);
+	if (GAME->m_level > 2 && !m_isAon && m_aTime >= 6) IMAGE->Render(m_shield, m_pos, VEC2(1.f, 1.f), 0, true);
 	if (GAME->m_level > 4) IMAGE->Render(m_black, VEC2(WINSIZEX / 2, WINSIZEY / 2), VEC2(1.5, 1.5), 0, true, D3DCOLOR_ARGB((int)m_blackAlpha, 255, 255, 255));
 	if (m_isAdown) IMAGE->Render(IMAGE->FindTexture("ChargeEFFECT", m_charge->m_nowFrame), m_pos, VEC2(3, 3), 0, true);
 }
@@ -275,13 +274,10 @@ void cPlayer::Fire()
 
 void cPlayer::Skill()
 {
-	if (GAME->m_level < 3) m_isAon = false;
-	if (GAME->m_level < 5) m_isBon = false;
-
 	static int cnt = 60;
 
 	if (KEYDOWN('X')) {
-		if(m_isAon) {
+		if(m_isAon && GAME->m_level > 2) {
 			m_isAon = false;
 			m_isAdown = true;
 			m_charge->m_nowFrame = 0;
@@ -296,7 +292,7 @@ void cPlayer::Skill()
 		m_charge->Update();
 
 	if (KEYDOWN(VK_SPACE)) {
-		if (m_isBon) {
+		if (m_isBon && GAME->m_level > 4) {
 			m_isBon = false;
 			m_blackAlpha = 200;
 			CAMERA->SetShake(0.2, 100);

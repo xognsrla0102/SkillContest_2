@@ -25,7 +25,7 @@ public:
 	bool m_isAdown;
 	bool m_isBon;
 	bool m_isReflect;
-
+	
 	bool m_isDamaged;
 	bool m_radialTan;
 

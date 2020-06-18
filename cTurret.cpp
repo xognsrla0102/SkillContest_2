@@ -2,7 +2,7 @@
 #include "cTurret.h"
 
 cTurret::cTurret(VEC2 pos, double downSpd)
-	: cEnemy(20 + 20 * GAME->m_level, 5 * GAME->m_nowStage), m_downSpd(downSpd)
+	: cEnemy(20 + 20 * GAME->m_level, 5 * GAME->m_nowStage * GAME->m_level), m_downSpd(downSpd)
 {
 	char str[256];
 	sprintf(str, "EnemyTurret%dIMG", GAME->m_nowStage - 1);

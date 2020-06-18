@@ -40,5 +40,9 @@ void cMidBossScene::Release()
 {
 	SOUND->Stop("MidBossSND");
 	OBJFIND(PLAYER)->SetActive(false);
+	((cBulletManager*)OBJFIND(BULLET))->Reset();
+	((cEnemyManager*)OBJFIND(ENEMY))->Release();
+	((cItemManager*)OBJFIND(ITEM))->Release();
+	EFFECT->Reset();
 	SAFE_DELETE(((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss);
 }

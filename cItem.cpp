@@ -60,6 +60,8 @@ void cItem::OnCollision(cObject* other)
 		}
 		else if (m_key == "ItemSkillTimeIMG") {
 			//모든 스킬 쿨타임 초기화
+			//if(!player->m_isAon) player->m_aTime = 0;
+			//if(!player->m_isBon) player->m_bTime = 0;
 		}
 		m_isLive = false;
 	}

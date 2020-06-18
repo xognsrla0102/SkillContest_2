@@ -2,7 +2,7 @@
 #include "cMeteor.h"
 
 cMeteor::cMeteor(VEC2 pos, double rot, double downSpd)
-	: cEnemy(0, 10), m_downSpd(downSpd)
+	: cEnemy(0, 10 * GAME->m_nowStage * GAME->m_level), m_downSpd(downSpd)
 {
 	m_img = IMAGE->FindTexture("EnemyMeteorIMG");
 

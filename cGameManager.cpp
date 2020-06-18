@@ -8,9 +8,9 @@ bool Comp(cScore* a, cScore* b) {
 cGameManager::cGameManager()
 {
 	Init();
-	m_scoreList[0] = new cScore("KDJ", 2020);
-	m_scoreList[1] = new cScore("KTH", 2019);
-	m_scoreList[2] = new cScore("SDH", 2018);
+	m_scoreList[0] = new cScore("KDJ", 485973);
+	m_scoreList[1] = new cScore("KTH", 295839);
+	m_scoreList[2] = new cScore("SDH", 195805);
 	m_scoreList[3] = new cScore;
 }
 
@@ -68,13 +68,9 @@ void cGameManager::Update()
 			break;
 		case 3:
 			m_expMax = 5500;
-			player->m_aTime = 0;
 			break;
 		case 4:
 			m_expMax = 7000;
-			break;
-		case 5:
-			player->m_bTime = 0;
 			break;
 		}
 	

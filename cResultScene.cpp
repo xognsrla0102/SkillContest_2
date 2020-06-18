@@ -73,15 +73,15 @@ void cResultScene::Render()
 	IMAGE->CropRender(m_gage, VEC2(300, 200), rt);
 	IMAGE->Render(m_gageLine, VEC2(300, 200));
 
-	IMAGE->DrawFont("당신의 점수 : ", VEC2(550, 500), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 255));
-	IMAGE->DrawFont(m_scorePrint, VEC2(800, 500), "HY견고딕", 40);
+	IMAGE->DrawFont("당신의 점수 : ", VEC2(350, 500), "HY견고딕", 100, D3DCOLOR_XRGB(255, 255, 255));
+	IMAGE->DrawFont(m_scorePrint, VEC2(1000, 500), "HY견고딕", 100);
 	
 	if ((int)m_nowYourScore + 2 > GAME->m_score)
-		IMAGE->DrawFont("엔터를 입력하여 진행하세요.", VEC2(550, 350), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 0));
+		IMAGE->DrawFont("엔터를 입력하여 진행하세요.", VEC2(550, 350), "HY견고딕", 100, D3DCOLOR_XRGB(255, 255, 0));
 	
 	if (m_isEnterInitial) {
-		IMAGE->DrawFont("이니셜 : ", VEC2(550, 600), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 255));
-		IMAGE->DrawFont(m_initial, VEC2(800, 600), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 0));
+		IMAGE->DrawFont("이니셜 : ", VEC2(480, 750), "HY견고딕", 100, D3DCOLOR_XRGB(255, 255, 255));
+		IMAGE->DrawFont(m_initial, VEC2(900, 750), "HY견고딕", 100, D3DCOLOR_XRGB(255, 255, 0));
 	}
 }
 

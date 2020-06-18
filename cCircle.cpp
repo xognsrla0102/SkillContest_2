@@ -2,7 +2,7 @@
 #include "cCircle.h"
 
 cCircle::cCircle(VEC2 pos, double downSpd)
-	: cEnemy(50 + 20 * GAME->m_level, 5), m_downSpd(downSpd)
+	: cEnemy(50 + 20 * GAME->m_level, 5 * GAME->m_nowStage * GAME->m_level), m_downSpd(downSpd)
 {
 	char str[256];
 	sprintf(str, "EnemyCircle%dIMG", GAME->m_nowStage - 1);

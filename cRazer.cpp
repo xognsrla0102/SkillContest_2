@@ -2,7 +2,7 @@
 #include "cRazer.h"
 
 cRazer::cRazer(VEC2 pos, bool isBehind)
-	: cEnemy(60 + 50 * GAME->m_level, 10 * GAME->m_nowStage), m_isBehind(isBehind)
+	: cEnemy(60 + 50 * GAME->m_level, 5 * GAME->m_nowStage * GAME->m_level), m_isBehind(isBehind)
 {
 	//레이저 애니메이션 정보
 	m_chargeEffect = new cAnimation(0.03, 24, true);

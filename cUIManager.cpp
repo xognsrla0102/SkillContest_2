@@ -50,6 +50,7 @@ void cUIManager::Update()
 	if (isChangeUI) m_next = find->second;
 
 	//교체할 ui가 있고, 현재 ui가 교체할 ui와 다를 때
+	//None일땐 m_next 가 null임
 	if (m_next && m_now != m_next) {
 		if (m_now) m_now->Release();
 		m_now = m_next;
