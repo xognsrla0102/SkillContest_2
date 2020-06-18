@@ -44,7 +44,7 @@ void cMidBossClear::Update()
 			if (whiteAlpha < 10) {
 				GAME->m_isBehind = false;
 				GAME->m_story = 2;
-				SCENE->ChangeScene("ResultScene", "BlackFade", 3);
+				SCENE->ChangeScene("IngameScene", "BlackFade", 3);
 			}
 		}
 	}

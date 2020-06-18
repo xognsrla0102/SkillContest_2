@@ -13,6 +13,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void OnCollision(cObject* other) override {}
+	void EnemyBulletReset();
 	void Reset();
 	void Release();
 

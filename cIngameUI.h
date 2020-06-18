@@ -7,6 +7,11 @@ private:
 	cTexture* m_life = nullptr;
 	cTexture* m_exp = nullptr;
 	cTexture* m_bossHP = nullptr;
+
+	cTexture* m_skillaon = nullptr;
+	cTexture* m_skillaoff = nullptr;
+	cTexture* m_skillbon = nullptr;
+	cTexture* m_skillboff = nullptr;
 public:
 	cImage* m_damage = nullptr;
 public:

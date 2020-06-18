@@ -82,6 +82,7 @@ void cMidBoss::Fire()
 		dir.y = sin(D3DXToRadian(rot));
 		D3DXVec2Normalize(&dir, &dir);
 
+		SOUND->Copy("EnemyFireSND");
 		char str[256];
 		sprintf(str, "EnemyBullet%dIMG", rand() % 4);
 		N_Way_Tan(str, 4, 90, m_pos, dir, VEC2(1, 1), 600, m_atk);
@@ -98,12 +99,14 @@ void cMidBoss::Fire()
 		if (m_time % 10 == 0) {
 			VEC2 dir = OBJFIND(PLAYER)->GetPos() - m_pos;
 			D3DXVec2Normalize(&dir, &dir);
+			SOUND->Copy("EnemyFireSND");
 			char str[256];
 			sprintf(str, "EnemyBullet%dIMG", rand() % 4);
 			N_Way_Tan(str, 36, 10, m_pos, dir, VEC2(4, 4), 400, m_atk);
 		}
 	}
 	else {
+		SOUND->Copy("EnemyFireSND");
 		char str[256];
 		sprintf(str, "EnemyBullet%dIMG", rand() % 4);
 		N_Way_Tan(str, 10, 36, m_pos, VEC2(0, 1), VEC2(3, 3), 150, m_atk, true, false, true);

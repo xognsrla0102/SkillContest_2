@@ -32,6 +32,8 @@ void cIngameScene::Init()
 
 void cIngameScene::Update()
 {
+	GAME->Update();
+
 	if (KEYDOWN('O')) GAME->m_isBehind = !GAME->m_isBehind;
 
 	if (KEYDOWN('P')) {
@@ -66,10 +68,19 @@ void cIngameScene::Release()
 	SAFE_DELETE(m_map);
 
 	SOUND->Stop("StageSND");
-	OBJFIND(PLAYER)->SetActive(false);
-	((cPlayer*)OBJFIND(PLAYER))->m_canMove = true;
+	auto player = (cPlayer*)OBJFIND(PLAYER);
+	player->SetActive(false);
+	player->m_canMove = true;
+	player->m_aTime = 10;
+	player->m_bTime = 20;
+	player->m_isAon = true;
+	player->m_isAon = true;
+	player->m_isAdown = false;
+	player->m_isReflect = false;
+
 	((cBulletManager*)OBJFIND(BULLET))->Reset();
 	((cEnemyManager*)OBJFIND(ENEMY))->Release();
+	((cItemManager*)OBJFIND(ITEM))->Release();
 	EFFECT->Reset();
 }
 
@@ -159,7 +170,10 @@ void cIngameScene::LevelDesign()
 		if (m_time == 180) CreateMeteor(5, 5, 380);
 		if (m_time == 182) CreateMeteor(5, 5, 380);
 		if (m_time == 184) CreateMeteor(5, 5, 380);
+
 		if (m_time == 186) CreateMeteor(3, 7, 380);
+		if (m_time == 186) CreateTurret(5, 5, 380);
+
 		if (m_time == 188) CreateMeteor(5, 5, 380);
 		if (m_time == 190) CreateMeteor(5, 5, 380);
 		if (m_time == 192) CreateMeteor(5, 5, 380);
@@ -174,6 +188,7 @@ void cIngameScene::LevelDesign()
 		}
 		if (m_time == 204) {
 			CreateMeteor(5, 5, 380);
+			CreateTurret(5, 5, 380);
 		}
 		if (m_time == 206) {
 			CreateMeteor(4, 4, 380);
@@ -373,13 +388,14 @@ void cIngameScene::CreateCircle(int startGrid, int endGrid, int speed)
 
 void cIngameScene::CreateRazer(int startGrid, int endGrid)
 {
-	VEC2 startPos = GXY(105 * startGrid, -100);
-	if (GAME->m_isBehind) startPos.y = GAMESIZE + 100;
-
+	VEC2 startPos = GXY(105 * startGrid, 0);
 	int num = endGrid - startGrid + 1;
-	for (int i = 0; i < num; ++i)
-		((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy().push_back(
+	auto& enemy = ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy();
+	for (int i = 0; i < num; ++i) {
+		enemy.push_back(
 			new cRazer(VEC2(startPos.x + i * 105, startPos.y), GAME->m_isBehind)
 		);
+		enemy[enemy.size() - 1]->m_itemName.push_back("ItemHpIMG");
+	}
 }
 

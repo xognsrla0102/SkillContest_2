@@ -3,27 +3,38 @@
 
 cPlayer::cPlayer() : cCharacter(100)
 {
-	//얘는 init에서 어차피 체력 설정해주므로 hp가 의미없음
 	Init();
+	m_charge = new cAnimation(0.01, 24, false);
 	m_fire = new cTimer(m_fireDelay[m_radialTan]);
 	m_img = IMAGE->FindTexture("IngamePlayerIMG");
+	m_black = IMAGE->FindTexture("BlackIMG");
+	m_shield = IMAGE->FindTexture("ShieldIMG");
 	m_objName = "Player";
 }
 
 cPlayer::~cPlayer()
 {
 	SAFE_DELETE(m_fire);
+	SAFE_DELETE(m_charge);
 }
 
 void cPlayer::Init()
 {
+	m_aTime = 10;
+	m_bTime = 20;
+
+	m_isAon = false;
+	m_isAon = false;
+	m_isAdown = false;
+	m_isReflect = false;
+
+	m_blackAlpha = 0;
+
 	GAME->m_level = 1;
 
 	m_a = 255;
 
 	m_originSpd = m_moveSpd = 1000.f;
-
-	m_damageTime = 2.f;
 
 	m_pos = GXY(GAMESIZE / 2, GAMESIZE / 2);
 
@@ -59,6 +70,7 @@ void cPlayer::Update()
 
 	Move();
 	ChangeWeapon();
+	Skill();
 
 	if (m_isDamaged) {
 		m_damageTime -= D_TIME;
@@ -84,24 +96,39 @@ void cPlayer::Render()
 	NoOutMap();
 	if (!m_isActive) return;
 	IMAGE->Render(m_img, m_pos, m_size, m_rot, true, D3DCOLOR_ARGB((int)m_a, 255, 255, 255));
+	if (GAME->m_level > 2 && !m_isAon && m_aTime >= 7) IMAGE->Render(m_shield, m_pos, VEC2(1.f, 1.f), 0, true);
+	if (GAME->m_level > 4) IMAGE->Render(m_black, VEC2(WINSIZEX / 2, WINSIZEY / 2), VEC2(1.5, 1.5), 0, true, D3DCOLOR_ARGB((int)m_blackAlpha, 255, 255, 255));
+	if (m_isAdown) IMAGE->Render(IMAGE->FindTexture("ChargeEFFECT", m_charge->m_nowFrame), m_pos, VEC2(3, 3), 0, true);
 }
 
 void cPlayer::OnCollision(cObject* other)
 {
+	if (!m_isAon && m_aTime >= 6) {
+		if (AABB(GetObjCollider(), other->GetObjCollider())) {
+			if (other->GetName() == "EnemyBullet") {
+				SOUND->Copy("GetItemSND");
+				SOUND->Copy("GetItemSND");
+				SOUND->Copy("GetItemSND");
+				other->SetLive(false);
+			}
+		}
+		return;
+	}
+
 	if (GAME->m_isNotDead || m_isDamaged) return;
 
-	if (AABB(GetCustomCollider(3), other->GetObjCollider())) {
+	if (AABB(GetCustomCollider(1), other->GetObjCollider())) {
 		CAMERA->SetShake(0.2, 30);
 		if (other->GetName() != "EnemyBullet") m_hp -= ((cEnemy*)other)->m_atk;
 		else m_hp -= ((cBullet*)other)->m_atk;
 		SOUND->Copy("PlayerDamageSND");
 		auto ingameUI = ((cIngameUI*)UI->FindUI("IngameSceneUI"));
 		ingameUI->m_damage->m_a = 255;
-		((cBulletManager*)OBJFIND(BULLET))->Reset();
+		((cBulletManager*)OBJFIND(BULLET))->EnemyBulletReset();
 
 		if (m_hp < 0) m_hp = 0;
 		m_isDamaged = true;
-		m_damageTime = 2;
+		m_damageTime = 1;
 		m_a = 128;
 	}
 
@@ -156,7 +183,34 @@ void cPlayer::N_Straight_Tan(string imageName, int n, int length, VEC2 pos, VEC2
 
 void cPlayer::Dead()
 {
-	
+	static double deadTime = 2;
+
+	if (SCENE->GetNowSceneKey() == "IngameScene")
+		SOUND->Stop("StageSND");
+	else if (SCENE->GetNowSceneKey() == "MidBossScene")
+		SOUND->Stop("MidBossSND");
+	else if (SCENE->GetNowSceneKey() == "BossScene")
+		SOUND->Stop("BossSND");
+
+	if ((int)(deadTime * 10) % 5 == 0) {
+		CAMERA->SetShake(0.3, 30);
+		SOUND->Copy("PlayerDamageSND");
+		SOUND->Copy("PlayerDamageSND");
+		SOUND->Copy("PlayerDamageSND");
+		EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, VEC2(m_pos + RandomInsideSquare() * 50), VEC2(0, 0)));
+	}
+
+	deadTime -= D_TIME;
+	if (deadTime < 0) {
+		deadTime = 2;
+		m_isLive = true;
+		SOUND->Copy("ExplosionSND");
+		SOUND->Copy("ExplosionSND");
+		SOUND->Copy("ExplosionSND");
+		SOUND->Copy("ExplosionSND");
+		SOUND->Copy("ExplosionSND");
+		SCENE->ChangeScene("TitleScene", "WhiteFade", 3);
+	}
 }
 
 void cPlayer::Move()
@@ -216,6 +270,110 @@ void cPlayer::Fire()
 				break;
 			}
 		}
+	}
+}
+
+void cPlayer::Skill()
+{
+	if (GAME->m_level < 3) m_isAon = false;
+	if (GAME->m_level < 5) m_isBon = false;
+
+	static int cnt = 60;
+
+	if (KEYDOWN('X')) {
+		if(m_isAon) {
+			m_isAon = false;
+			m_isAdown = true;
+			m_charge->m_nowFrame = 0;
+		}
+		else {
+			SOUND->Copy("NoSkillSND");
+			FONT->AddFont("아직 사용할 수 없습니다.", GXY(GAMESIZE / 2 - 300, 300), 80, 3, true, D3DCOLOR_XRGB(255, 0, 0));
+		}
+	}
+
+	if (m_isAdown)
+		m_charge->Update();
+
+	if (KEYDOWN(VK_SPACE)) {
+		if (m_isBon) {
+			m_isBon = false;
+			m_blackAlpha = 200;
+			CAMERA->SetShake(0.2, 100);
+			SOUND->Copy("RedCircleSND");
+			SOUND->Copy("RedCircleSND");
+			SOUND->Copy("RedCircleSND");
+			EFFECT->AddEffect(new cEffect("RedCircleEFFECT", 1, 0.02, m_pos, VEC2(0, 0), VEC2(30, 30), VEC2(1, 1), 100));
+
+			((cBulletManager*)OBJFIND(BULLET))->EnemyBulletReset();
+			for (auto iter : ((cEnemyManager*)OBJFIND(ENEMY))->GetEnemy()) {
+				if (iter->GetName() == "EnemyMeteor") continue;
+				((cEnemy*)iter)->m_hp -= m_atk[m_radialTan] * 10;
+				if (((cEnemy*)iter)->m_hp <= 0) {
+					EFFECT->AddEffect(new cEffect("ExplosionEFFECT", 32, 0.02, VEC2(iter->GetPos() + RandomInsideSquare() * 50), VEC2(0, 0)));
+					iter->SetLive(false);
+				}
+			}
+			if (((cEnemyManager*)OBJFIND(ENEMY))->m_boss) {
+				((cEnemyManager*)OBJFIND(ENEMY))->m_boss->m_hp -= m_atk[m_radialTan] * 200;
+				if(((cEnemyManager*)OBJFIND(ENEMY))->m_boss->m_hp <= 0)
+					((cEnemyManager*)OBJFIND(ENEMY))->m_boss->m_isDead = true;
+			}
+			if (((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss) {
+				((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss->m_hp -= m_atk[m_radialTan] * 200;
+				if (((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss->m_hp <= 0)
+					((cEnemyManager*)OBJFIND(ENEMY))->m_midBoss->m_isDead = true;
+			}
+		}
+		else {
+			SOUND->Copy("NoSkillSND");
+			FONT->AddFont("아직 사용할 수 없습니다.", GXY(GAMESIZE / 2 - 300, 300), 80, 3, true, D3DCOLOR_XRGB(255, 0, 0));
+		}
+	}
+
+	if (!m_isAon) {
+		m_aTime -= D_TIME;
+		if (m_aTime < 0) {
+			m_aTime = 10;
+			m_isAon = true;
+			if (m_isReflect) m_isReflect = false;
+		}
+		if (m_aTime < 6) if (m_isAdown) m_isAdown = false;
+
+		if (KEYUP('X') && m_isAdown) {
+			if (6 <= m_aTime && m_aTime <= 7) {
+				m_isReflect = true;
+				cnt = 60;
+			}
+			m_isAdown = false;
+		}
+
+		if (m_isReflect) {
+			if (cnt % 60 == 0) {
+				char str[256];
+				sprintf(str, "EnemyBullet%dIMG", rand() % 4);
+				((cBulletManager*)OBJFIND(BULLET))->EnemyBulletReset();
+				SOUND->Copy("EnemyFireSND");
+				SOUND->Copy("EnemyFireSND");
+				SOUND->Copy("EnemyFireSND");
+
+				N_Way_Tan(str, 36, 10, m_pos, VEC2(0, 1), VEC2(3, 3), 2000, m_atk[m_radialTan]);
+				cnt = 1;
+			}
+			cnt++;
+		}
+	}
+
+	if (!m_isBon) {
+		m_bTime -= D_TIME;
+		if (m_bTime < 0) {
+			m_bTime = 20;
+			m_isBon = true;
+			m_blackAlpha = 0;
+		}
+
+		if (m_bTime >= 17) ((cBulletManager*)OBJFIND(BULLET))->EnemyBulletReset();
+		else Lerp(m_blackAlpha, 0.0);
 	}
 }
 

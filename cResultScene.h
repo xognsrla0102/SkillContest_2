@@ -4,9 +4,12 @@ class cResultScene : public cScene
 {
 private:
 	cTexture* m_bg = nullptr;
+	cTexture* m_gage = nullptr;
+	cTexture* m_gageLine = nullptr;
 	string m_scorePrint;
 	string m_initial;
-	float m_nowYourScore;
+
+	double m_nowYourScore;
 	bool m_isEnterInitial;
 public:
 	cResultScene();

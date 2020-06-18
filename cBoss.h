@@ -16,8 +16,10 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
-	virtual void Move() override;
-	virtual void Fire() override;
-	void Dead() override;
+	virtual void Move()	  override;
+	virtual void Fire()	  override;
+	virtual void Dead()	  override;
+	void RazerPattern();
+	void CreateRazer(int startGrid, int endGrid, bool isBehind);
 };
 

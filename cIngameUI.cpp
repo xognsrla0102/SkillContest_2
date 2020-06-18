@@ -8,6 +8,11 @@ cIngameUI::cIngameUI()
 	m_exp = IMAGE->FindTexture("IngameEXPUI");
 	m_bossHP = IMAGE->FindTexture("IngameBossHPUI");
 
+	m_skillaon = IMAGE->FindTexture("SkillAOnIMG");
+	m_skillaoff = IMAGE->FindTexture("SkillAOffIMG");
+	m_skillbon = IMAGE->FindTexture("SkillBOnIMG");
+	m_skillboff = IMAGE->FindTexture("SkillBOffIMG");
+
 	m_damage = new cImage;
 	m_damage->m_text = IMAGE->FindTexture("IngameDamageUI");
 }
@@ -37,6 +42,20 @@ void cIngameUI::Render()
 	if(((cPlayer*)OBJFIND(PLAYER))->m_radialTan) IMAGE->DrawFont(": RADIATION", VEC2(1650, 430), "HY°ß°íµñ", 30);
 	else IMAGE->DrawFont(": STRAIGHT", VEC2(1650, 430), "HY°ß°íµñ", 30);
 
+	auto player = (cPlayer*)OBJFIND(PLAYER);
+	if (player->m_isAon) IMAGE->Render(m_skillaon, GXY(1180, 830), VEC2(1, 1), 0, true);
+	else {
+		IMAGE->Render(m_skillaoff, GXY(1180, 830), VEC2(1, 1), 0, true);
+		 if (GAME->m_level < 3) IMAGE->DrawFont("ÇÊ¿ä·¹º§ 3", GXY(1130, 820), "HY°ß°íµñ");
+		 else IMAGE->DrawFont(to_string((int)player->m_aTime), GXY(1170, 820), "HY°ß°íµñ");
+	}
+	if (player->m_isBon) IMAGE->Render(m_skillbon, GXY(1350, 830), VEC2(1, 1), 0, true);
+	else {
+		IMAGE->Render(m_skillboff, GXY(1350, 830), VEC2(1, 1), 0, true);
+		if(GAME->m_level < 5) IMAGE->DrawFont("ÇÊ¿ä·¹º§ 5", GXY(1300, 820), "HY°ß°íµñ");
+		else IMAGE->DrawFont(to_string((int)player->m_bTime), GXY(1330, 820), "HY°ß°íµñ");
+	}
+
 	char str[3][256] = {
 		": AVOID ENEMY BULLET",
 		": DESTROY THE PLANET",
@@ -47,8 +66,6 @@ void cIngameUI::Render()
 	char tmp[256];
 	sprintf(tmp, "%07d", GAME->m_score);
 	IMAGE->DrawFont(tmp, VEC2(1550, 130), "HY°ß°íµñ", 70);
-
-	auto player = (cPlayer*)OBJFIND(PLAYER);
 
 	RECT rt = {
 		0, 0,

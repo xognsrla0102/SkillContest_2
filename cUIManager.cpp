@@ -63,7 +63,9 @@ void cUIManager::Update()
 void cUIManager::Render()
 {
 	if (m_now) m_now->Render();
+#ifdef _DEBUG
 	IMAGE->DrawFont(to_string(DXUTGetFPS()), VEC2(1800, 900));
+#endif
 }
 
 cUI* cUIManager::FindUI(string name)

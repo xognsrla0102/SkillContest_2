@@ -68,9 +68,13 @@ void cGameManager::Update()
 			break;
 		case 3:
 			m_expMax = 5500;
+			player->m_aTime = 0;
 			break;
 		case 4:
 			m_expMax = 7000;
+			break;
+		case 5:
+			player->m_bTime = 0;
 			break;
 		}
 	

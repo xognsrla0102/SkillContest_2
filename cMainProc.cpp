@@ -58,6 +58,11 @@ cMainProc::cMainProc()
 
 	IMAGE->AddTexture("PlanetIMG", "resources/image/enemy/planet.png");
 
+	IMAGE->AddTexture("SkillAOnIMG", "resources/image/ui/ingame/aon.png");
+	IMAGE->AddTexture("SkillAOffIMG", "resources/image/ui/ingame/aoff.png");
+	IMAGE->AddTexture("SkillBOnIMG", "resources/image/ui/ingame/bon.png");
+	IMAGE->AddTexture("SkillBOffIMG", "resources/image/ui/ingame/boff.png");
+
 	IMAGE->AddTexture("EnemyCircle0IMG", "resources/image/enemy/0_circle.png");
 	IMAGE->AddTexture("EnemyCircle1IMG", "resources/image/enemy/1_circle.png");
 
@@ -76,10 +81,10 @@ cMainProc::cMainProc()
 	IMAGE->AddTexture("ItemHpIMG", "resources/image/item/hp.png");
 	IMAGE->AddTexture("ItemLevelUpIMG", "resources/image/item/levelup.png");
 	IMAGE->AddTexture("ItemSkillTimeIMG", "resources/image/item/skilltime.png");
-
 	IMAGE->AddTexture("BossEnterIMG", "resources/image/ingame/bossenter.png");
-
 	IMAGE->AddTexture("ShieldIMG", "resources/image/ui/ingame/shield.png");
+	IMAGE->AddTexture("ResultGageIMG", "resources/image/ui/result/gage.png");
+	IMAGE->AddTexture("ResultGageLineIMG", "resources/image/ui/result/gageline.png");
 
 	SOUND->AddSound("TitleSND", L"resources/sound/title.wav");
 	SOUND->AddSound("TitleWarningSND", L"resources/sound/titlewarning.wav");
@@ -101,6 +106,7 @@ cMainProc::cMainProc()
 	SOUND->AddSound("RazerFireSND", L"resources/sound/razer_fire.wav");
 	SOUND->AddSound("GetItemSND", L"resources/sound/getitem.wav");
 	SOUND->AddSound("NoSkillSND", L"resources/sound/noskill.wav");
+	SOUND->AddSound("EnemyFireSND", L"resources/sound/enemyfire.wav");
 	//SCENE 매니저 생성자 호출
 	SCENE;
 
@@ -143,7 +149,6 @@ void cMainProc::Update()
 	INPUT->Update();
 	CAMERA->Update();
 	UI->Update();
-	GAME->Update();
 
 	if (KEYDOWN(VK_F4)) {
 		CAMERA->m_size = VEC2(1, 1);

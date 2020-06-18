@@ -27,6 +27,7 @@ void cMidBossScene::Init()
 
 void cMidBossScene::Update()
 {
+	GAME->Update();
 }
 
 void cMidBossScene::Render()

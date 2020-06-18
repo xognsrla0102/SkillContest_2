@@ -37,7 +37,7 @@ void cEnemyBullet::Update()
 	}
 	m_pos += m_dir * m_bulletSpd * D_TIME * m_accel;
 
-	if (OutMapChk(100)) SetLive(false);
+	if (OutMapChk(500)) SetLive(false);
 }
 
 void cEnemyBullet::Dead()

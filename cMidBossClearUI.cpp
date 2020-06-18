@@ -36,6 +36,7 @@ void cMidBossClearUI::Update()
 			enterHit += 2;
 			if (enterHit > 50) {
 				CAMERA->SetShake(1, 40);
+				SOUND->Copy("RazerFireSND");
 				enterHit = 50;
 				isEnter = true;
 			}

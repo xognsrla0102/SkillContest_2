@@ -41,5 +41,6 @@ void cCircle::Move()
 
 void cCircle::Fire()
 {
+	SOUND->Copy("EnemyFireSND");
 	N_Way_Tan("EnemyBullet2IMG", 3, 120, m_pos, VEC2(0, -1), VEC2(1, 1), 100, m_atk, false, false, false, true);
 }

@@ -8,10 +8,23 @@ private:
 	double m_moveSpd;
 	double m_damageTime;
 public:
+	cAnimation* m_charge = nullptr;
+	cTexture* m_black = nullptr;
+	double m_blackAlpha;
+
+	cTexture* m_shield = nullptr;
 	cTimer* m_fire = nullptr;
+
+	float m_aTime;
+	float m_bTime;
 
 	float m_fireDelay[2] = { 0 };
 	float m_atk[2] = { 0 };
+
+	bool m_isAon;
+	bool m_isAdown;
+	bool m_isBon;
+	bool m_isReflect;
 
 	bool m_isDamaged;
 	bool m_radialTan;
@@ -36,6 +49,8 @@ public:
 	virtual void Dead() override;
 	virtual void Move() override;
 	virtual void Fire() override;
+
+	void Skill();
 	void ChangeWeapon();
 	void NoOutMap();
 };

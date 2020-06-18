@@ -4,6 +4,8 @@
 cResultScene::cResultScene()
 {
 	m_bg = IMAGE->FindTexture("ResultBG");
+	m_gage = IMAGE->FindTexture("ResultGageIMG");
+	m_gageLine = IMAGE->FindTexture("ResultGageLineIMG");
 }
 
 cResultScene::~cResultScene()
@@ -23,7 +25,7 @@ void cResultScene::Init()
 void cResultScene::Update()
 {
 	char str[256];
-	Lerp(m_nowYourScore, (float)GAME->m_score, 1);
+	Lerp(m_nowYourScore, (double)GAME->m_score, 1);
 	sprintf(str, "%07d", (int)m_nowYourScore);
 	m_scorePrint = str;
 	
@@ -32,11 +34,9 @@ void cResultScene::Update()
 			m_nowYourScore = GAME->m_score;
 	
 		if (m_isEnterInitial) {
-			if (m_initial.size() && KEYDOWN(VK_BACK))
-				m_initial.pop_back();
-			for (int i = 'A'; i != 'Z'; ++i)
-				if (m_initial.size() < 3 && KEYDOWN(i))
-					m_initial += i;
+			if (m_initial.size() && KEYDOWN(VK_BACK)) m_initial.pop_back();
+			for (int i = 'A'; i <= 'Z'; ++i)
+				if (m_initial.size() < 3 && KEYDOWN(i)) m_initial += i;
 	
 			if (SCENE->m_isSceneChange == false && m_initial.size() == 3 && KEYDOWN(VK_RETURN)) {
 				GAME->m_scoreList[3]->m_initial = this->m_initial;
@@ -49,6 +49,7 @@ void cResultScene::Update()
 			if (SCENE->m_isSceneChange == false && KEYDOWN(VK_RETURN)) {
 				if (GAME->m_nowStage == 1) {
 					GAME->m_nowStage++;
+					GAME->m_story = 0;
 					SCENE->ChangeScene("IngameScene", "BlackFade", 3);
 				}
 				else {
@@ -62,15 +63,25 @@ void cResultScene::Update()
 void cResultScene::Render()
 {
 	IMAGE->Render(m_bg, VEC2(0, 0));
-	IMAGE->DrawFont("당신의 점수 : ", VEC2(250, 300), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 255));
-	IMAGE->DrawFont(m_scorePrint, VEC2(500, 300), "HY견고딕", 40);
+
+	RECT rt = {
+		0 , 0,
+		m_nowYourScore / (double)(GAME->m_score) * m_gage->m_info.Width,
+		m_gage->m_info.Height
+	};
+
+	IMAGE->CropRender(m_gage, VEC2(300, 200), rt);
+	IMAGE->Render(m_gageLine, VEC2(300, 200));
+
+	IMAGE->DrawFont("당신의 점수 : ", VEC2(550, 500), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 255));
+	IMAGE->DrawFont(m_scorePrint, VEC2(800, 500), "HY견고딕", 40);
 	
 	if ((int)m_nowYourScore + 2 > GAME->m_score)
-		IMAGE->DrawFont("엔터를 입력하여 진행하세요.", VEC2(250, 150), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 0));
+		IMAGE->DrawFont("엔터를 입력하여 진행하세요.", VEC2(550, 350), "HY견고딕", 40, D3DCOLOR_XRGB(255, 255, 0));
 	
 	if (m_isEnterInitial) {
-		IMAGE->DrawFont("이니셜 : ", VEC2(250, 400), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 255));
-		IMAGE->DrawFont(m_initial, VEC2(500, 400), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 0));
+		IMAGE->DrawFont("이니셜 : ", VEC2(550, 600), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 255));
+		IMAGE->DrawFont(m_initial, VEC2(800, 600), "HY견고딕", 60, D3DCOLOR_XRGB(255, 255, 0));
 	}
 }
 

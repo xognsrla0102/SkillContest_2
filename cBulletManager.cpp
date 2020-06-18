@@ -43,6 +43,12 @@ void cBulletManager::Render()
 }
 
 
+void cBulletManager::EnemyBulletReset()
+{
+	for (auto iter : m_eBullet)
+		iter->SetLive(false);
+}
+
 void cBulletManager::Reset()
 {
 	for (auto iter : m_pBullet)

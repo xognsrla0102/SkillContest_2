@@ -13,18 +13,17 @@ cBossScene::~cBossScene()
 void cBossScene::Init()
 {
 	SOUND->Play("BossSND", true);
-
 	char str[256];
 	sprintf(str, "Stage%dBG", GAME->m_nowStage);
 	m_map = IMAGE->FindTexture(str);
 	OBJFIND(PLAYER)->SetActive(true);
 	OBJFIND(PLAYER)->SetPos(GXY(GAMESIZE / 2, 800));
-
 	((cEnemyManager*)OBJFIND(ENEMY))->m_boss = new cBoss;
 }
 
 void cBossScene::Update()
 {
+	GAME->Update();
 }
 
 void cBossScene::Render()
@@ -38,3 +37,4 @@ void cBossScene::Release()
 	OBJFIND(PLAYER)->SetActive(false);
 	SAFE_DELETE(((cEnemyManager*)OBJFIND(ENEMY))->m_boss);
 }
+

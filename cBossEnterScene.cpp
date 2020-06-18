@@ -11,15 +11,6 @@ cBossEnterScene::cBossEnterScene()
 	m_player->m_text = IMAGE->FindTexture("IngamePlayerIMG");
 
 	m_boss = new cImage;
-
-	char str[256];
-	sprintf(str, "EnemyRazer%dIMG", GAME->m_nowStage - 1);
-	for (int i = 0; i < 3; ++i) {
-		m_leftRazer.push_back(new cImage);
-		m_rightRazer.push_back(new cImage);
-		m_leftRazer[i]->m_text = 
-		m_rightRazer[i]->m_text = IMAGE->FindTexture(str);
-	}
 }
 
 cBossEnterScene::~cBossEnterScene()
@@ -51,6 +42,14 @@ void cBossEnterScene::Init()
 	m_player->m_pos = GXY(GAMESIZE / 2, GAMESIZE + 100);
 	whiteAlpha = blackAlpha = 0;
 
+	sprintf(str, "EnemyRazer%dIMG", GAME->m_nowStage - 1);
+	for (int i = 0; i < 3; ++i) {
+		m_leftRazer.push_back(new cImage);
+		m_rightRazer.push_back(new cImage);
+		m_leftRazer[i]->m_text =
+			m_rightRazer[i]->m_text = IMAGE->FindTexture(str);
+	}
+
 	for (int i = 0; i < 3; ++i) {
 		m_leftRazer[i]->m_pos = GXY(-1000, 600 + i * 200);
 		m_rightRazer[i]->m_pos = GXY(GAMESIZE + 1000, 600 + i * 200);
@@ -61,6 +60,12 @@ void cBossEnterScene::Update()
 {
 	if (m_t->Update()) {
 		time++;
+		if (time == 30 || time == 50 || time == 70) {
+			CAMERA->SetShake(0.5, 20);
+			SOUND->Copy("TitleWarningSND");
+			SOUND->Copy("TitleWarningSND");
+		}
+
 		if (time == 125) {
 			SOUND->Copy("RazerChargeSND");
 			SOUND->Copy("RazerChargeSND");
@@ -127,11 +132,22 @@ void cBossEnterScene::Render()
 		IMAGE->Render(iter->m_text, iter->m_pos, VEC2(1, 1), -90, true);
 	for (auto iter : m_rightRazer)
 		IMAGE->Render(iter->m_text, iter->m_pos, VEC2(1, 1), 90, true);
-	IMAGE->Render(m_black, VEC2(0, 0), VEC2(1, 1), 0, false, D3DCOLOR_ARGB((int)blackAlpha, 255, 255, 255));
+	IMAGE->Render(m_black, VEC2(WINSIZEX / 2, WINSIZEY / 2), VEC2(2, 2), 0, true, D3DCOLOR_ARGB((int)blackAlpha, 255, 255, 255));
+
+	if (30 <= time && time <= 70)
+		if (time % 2 == 0)
+			IMAGE->DrawFont("WARNING!!", GXY(GAMESIZE / 2 - 450, 200), "HY°ß°íµñ", 150, 0xffff0000);
 }
 
 void cBossEnterScene::Release()
 {
+	for (auto iter : m_leftRazer)
+		SAFE_DELETE(iter);
+	m_leftRazer.clear();
+	for (auto iter : m_rightRazer)
+		SAFE_DELETE(iter);
+	m_rightRazer.clear();
+
 	SOUND->Stop("TitleSND");
 	EFFECT->Reset();
 	CAMERA->ResetCamera();

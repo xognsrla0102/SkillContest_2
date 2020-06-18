@@ -33,12 +33,12 @@ void cEnemyManager::Update()
 
 void cEnemyManager::Render()
 {
-	for (auto iter : m_enemy)
-		iter->Render();
 	if (m_midBoss && m_midBoss->GetLive())
 		m_midBoss->Render();
 	if (m_boss && m_boss->GetLive())
 		m_boss->Render();
+	for (auto iter : m_enemy)
+		iter->Render();
 }
 
 void cEnemyManager::Release()

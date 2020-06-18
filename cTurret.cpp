@@ -43,6 +43,7 @@ void cTurret::Move()
 
 void cTurret::Fire()
 {
+	SOUND->Copy("EnemyFireSND");
 	VEC2 dir = OBJFIND(PLAYER)->GetPos() - m_pos;
 	D3DXVec2Normalize(&dir, &dir);
 	N_Straight_Tan("EnemyBullet0IMG", 1, 10, m_pos, dir, VEC2(1, 1), 800, m_atk);

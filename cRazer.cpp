@@ -7,23 +7,26 @@ cRazer::cRazer(VEC2 pos, bool isBehind)
 	//레이저 애니메이션 정보
 	m_chargeEffect = new cAnimation(0.03, 24, true);
 	m_pos = pos;
+	if (isBehind) m_pos.y = GAMESIZE + 200;
+	else m_pos.y = -200;
+
 	m_size = VEC2(0.5, 0.5);
 
 	m_path = new cPath(m_pos);
 
-	if (isBehind) {
-		m_path->AddPoint(VEC2(m_pos.x, GAMESIZE + 100), 5, 0);
-		m_path->AddPoint(VEC2(m_pos.x, GAMESIZE + 100), 0, 2);
+	if (m_isBehind) {
+		m_path->AddPoint(VEC2(m_pos.x, GAMESIZE + 200), 5, 0);
+		m_path->AddPoint(VEC2(m_pos.x, GAMESIZE + 200), 0, 2);
 	}
 	else {
 		m_path->AddPoint(VEC2(m_pos.x, 200), 5, 0);
 		m_path->AddPoint(VEC2(m_pos.x, 200), 0, 2);
 	}
 
-	if (pos.x < GX(GAMESIZE / 2))
-		m_path->AddPoint(GXY(-250, pos.y), 3, 0);
+	if (m_pos.x < GX(GAMESIZE / 2))
+		m_path->AddPoint(GXY(-250, m_pos.y), 3, 0);
 	else
-		m_path->AddPoint(GXY(GAMESIZE + 250, pos.y), 3, 0);
+		m_path->AddPoint(GXY(GAMESIZE + 250, m_pos.y), 3, 0);
 
 	char str[256];
 	sprintf(str, "EnemyRazer%dIMG", GAME->m_nowStage - 1);
@@ -43,7 +46,7 @@ void cRazer::Update()
 	if (CanFire() && m_isChargeTime)
 		Fire();
 
-	if(OutMapChk(200)) SetLive(false);
+	if(OutMapChk(500)) SetLive(false);
 }
 
 void cRazer::Move()
@@ -95,15 +98,13 @@ void cRazer::Move()
 
 void cRazer::Render()
 {
-	if (!m_isBehind) {
-		IMAGE->Render(m_img, m_pos, m_size, m_rot, true);
-		if (m_isChargeTime)
-			IMAGE->Render(IMAGE->FindTexture("ChargeRazerIMG", m_chargeEffect->m_nowFrame), VEC2(m_pos.x, m_pos.y + 50), VEC2(3, 3), 0.f, true);
-	}
-	else {
+	IMAGE->Render(m_img, m_pos, m_size, m_rot, true);
+	if (m_isChargeTime)
+		IMAGE->Render(IMAGE->FindTexture("ChargeRazerIMG", m_chargeEffect->m_nowFrame), VEC2(m_pos.x, m_pos.y + 50), VEC2(3, 3), 0.f, true);
+
+	if(m_isBehind)
 		if (m_isChargeTime)
 			IMAGE->DrawFont("!!!", VEC2(m_pos.x, GAMESIZE - 100), "HY견고딕", 50, D3DCOLOR_XRGB(255, 255, 0));
-	}
 }
 
 

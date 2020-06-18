@@ -22,7 +22,7 @@ public:
 
 class cFontManager : public cSingleton<cFontManager>
 {
-private:
+public:
 	vector<cFontInfo*> m_fonts;
 public:
 	cFontManager() {}
